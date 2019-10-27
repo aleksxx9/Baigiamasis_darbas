@@ -1,0 +1,40 @@
+{
+  "name": "hr",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "cb-react-form-builder": "^0.1.51",
+    "form-builder": "0.0.1",
+    "formBuilder": "^3.2.5",
+    "forms-builder": "^0.5.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-form-builder2": "^0.3.2",
+    "react-form-creator": "^1.0.0",
+    "react-icons": "^3.7.0",
+    "react-scripts": "3.2.0",
+    "reactstrap": "^8.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
