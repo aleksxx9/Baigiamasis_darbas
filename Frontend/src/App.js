@@ -48,7 +48,7 @@ const checkAuth = () => {
   if (!exp) {
     return false;
   }
-  if (exp == "admin") {
+  if (exp == "Admin" || exp == "Super Admin") {
     refreshToken();
     return true;
   }

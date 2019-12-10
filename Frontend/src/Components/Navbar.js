@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar, NavbarBrand, Button, Popover, PopoverBody } from "reactstrap";
 import { FaHome, FaUserPlus } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
+import { GoSignIn } from "react-icons/go";
 import { GoPerson } from "react-icons/go";
 
 class Nav extends React.Component {
@@ -42,7 +43,7 @@ class Nav extends React.Component {
         }}
       >
         {//checks which navbar elements to represent
-        localStorage.getItem("userName") && localStorage.getItem("userRole") ? (
+        localStorage.getItem("userName") && (localStorage.getItem("userRole") == "Admin" || localStorage.getItem("userRole") == "Super Admin") ? (
           <div className="col-12" style={{ marginTop: "12px" }}>
             <div className="col-2 col-sm-3 col-md-1 col-lg-1 col-xl-1 d-inline-block text-left">
               <Button
@@ -127,7 +128,24 @@ class Nav extends React.Component {
               className="navbar-brand mx-auto"
               style={{ fontSize: "1em", fontWeight: "bold", height: "45px" }}
             ></NavbarBrand>
+            <div className="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right"  style={{ marginTop: "12px" }}>
+            <Button
+            
+                className="secondary"
+                style={{
+                  marginRight: "-15px",
+                  float: "right",
+                  backgroundColor: "transparent",
+                  border: "none",
+                }}
+                onClick={() => this.props.history.push("/login")}
+              >
+                 <GoSignIn size="25px" />
+              </Button>
+              </div>
+           
           </div>
+          
         )}
       </Navbar>
     );

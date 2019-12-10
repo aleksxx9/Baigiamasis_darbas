@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./hiring.css";
+import { FaYCombinator } from "react-icons/fa";
 
 export default class hiringAccept extends Component {
   constructor(props) {
@@ -29,31 +30,33 @@ export default class hiringAccept extends Component {
       }
       if (!data[0]) this.props.history.push("./mainPage");
       this.setState({ name: data[0].name });
-      this.fillData(data);
+      await this.fillData(data);
     } catch (e) {
       this.setState({ error: e });
     }
   }
 
-  componentDidMount() {
-    this.getForm();
-
+  async componentDidMount() {
+    await this.getForm();
     const s = document.createElement("script");
     s.type = "text/javascript";
     s.async = true;
-
+    
     s.innerHTML =
-      'function sendData(id) {let data = document.getElementById(id);  sendData1(data)  }  async function sendData1(hired) {var id = hired.id;  const name1 = $(document.getElementById("Name")).prop("innerHTML");  var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = JSON.stringify(newMessage);try {const response = await fetch("' +
+      'function sendData(id) {let data = document.getElementById(id); sendData1(data)  }  async function sendData1(hired) {var id = hired.id;'+
+      'const name1 = $(document.getElementById("Name")).prop("innerHTML");' +
+      'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = newMessage.replace(/<\\/?("[^"]*"|\'[^\']*\'|[^>])*(>|$)/g, " ");'+
+      'try {const response = await fetch("' +
       localStorage.getItem("hireSend") +
       "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
       "name1" +
       ', data: newMessage,}),});  try {const response = await fetch("' +
-      localStorage.getItem("hireSendDelete") +
+      localStorage.getItem("hireSendDelete")  +
       "\", {headers: {'Content-Type':'application/json', name:" +
       "id" +
       ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}} catch (e) {console.log(e);}}";
+      if (this.instance != null) this.instance.appendChild(s);
 
-    this.instance.appendChild(s);
     const del = document.createElement("script");
     del.type = "text/javascript";
     del.async = true;
@@ -65,7 +68,7 @@ export default class hiringAccept extends Component {
       "id" +
       ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
 
-    this.delete.appendChild(del);
+    if (this.delete != null) this.delete.appendChild(del);
   }
 
   render() {
@@ -75,10 +78,10 @@ export default class hiringAccept extends Component {
         {this.state.data ? (
           <div>
             {this.state.data.map(elem => {
-              const newElem = JSON.parse(elem.data);
+              const newElem = elem.data;
               data =
                 data +
-                "<div '><div class='accordion'" +
+                "<div '><div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default' " +
                 ">" +
                 newElem[0].value +
                 " " +

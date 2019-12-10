@@ -230,7 +230,7 @@ export default class formFilling extends Component {
           <Button
             id="submit"
             onClick={async () => {
-              const formData = JSON.stringify($("#FormFill").serializeArray());
+              const formData = $("#FormFill").serializeArray();
               try {
                 await fetch(localStorage.getItem("AnswerForm"), {
                   headers: { "Content-Type": "application/json" },

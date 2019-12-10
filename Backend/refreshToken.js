@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
     );
     res.set("auth", token2).send(token2);
     next();
-  } catch {
+  } catch (e) {
     res.status(400).send("Invalid token");
   }
 };

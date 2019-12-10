@@ -9,10 +9,12 @@
     "formBuilder": "^3.2.5",
     "forms-builder": "^0.5.2",
     "react": "^16.10.2",
+    "react-datepicker": "^2.10.1",
     "react-dom": "^16.10.2",
     "react-form-builder2": "^0.3.2",
     "react-form-creator": "^1.0.0",
     "react-icons": "^3.7.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "reactstrap": "^8.1.1"
   },

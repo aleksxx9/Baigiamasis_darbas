@@ -77,9 +77,10 @@ export default class Arcihve extends Component {
             {this.state.data.map(elem => {
               data =
                 data +
-                "<div class='accordion'></div><div class='panel d-flex justify-content-center'>" +
+                "<div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default'></div><div class='panel d-flex justify-content-center'>" +
                 elem.data.slice(1, elem.data.length - 1) +
                 "</div></br>";
+                data = data.replace(/(    )/g, '<br>');
               document.getElementById("form").innerHTML = data + "</div>";
             })}
           </div>
@@ -95,8 +96,8 @@ export default class Arcihve extends Component {
           <div id="form" className=" col-6 " />
         </div>
         <br />
-        <div ref={el => (this.instance = el)} />;
-        <div ref={el => (this.delete = el)} />;
+        <div ref={el => (this.instance = el)} />
+        <div ref={el => (this.delete = el)} />
         <br />
       </div>
     );

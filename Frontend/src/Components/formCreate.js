@@ -1,7 +1,7 @@
 import $ from "jquery";
 import React, { Component, createRef } from "react";
-import { Button } from "reactstrap";
-
+import { Button, Input } from "reactstrap";
+import DatePicker from "react-datepicker";
 window.jQuery = $;
 window.$ = $;
 
@@ -12,6 +12,7 @@ export default class formCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      startDate: new Date(),
       input: "",
     };
     this.handleinput = this.handleinput.bind(this);
@@ -27,6 +28,12 @@ export default class formCreate extends React.Component {
     this.setState({ input: event.target.value });
   }
 
+  handleChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
   async saveForm(data) {
     try {
       await fetch(localStorage.getItem("createForm"), {
@@ -41,7 +48,7 @@ export default class formCreate extends React.Component {
         }),
       });
       alert("Form created successfully");
-    } catch (e) {}
+    } catch (e) { }
   }
 
   fb = createRef();
@@ -131,8 +138,8 @@ export default class formCreate extends React.Component {
       }
     });
 
-    document.getElementById("clear-all-fields").onclick = function() {
-      formBuilder.actions.clearFields();
+    document.getElementById("clear-all-fields").onclick = function () {
+      window.location.reload();
     };
   }
 
@@ -146,12 +153,28 @@ export default class formCreate extends React.Component {
           <label style={{ marginRight: "15px" }}>Form name: </label>
           <input
             ref={input => (this.input = input)}
-            className="input-group form-control col-6"
+            className="input-group form-control col-4"
             id="name"
             onKeyUp={this.handleKey}
           ></input>
+          <Input type="select" name="select" className="input-group form-control col-2" >
+            <option value="Everyone">Everyone</option>
+            <option value="Regular users">Regular users</option>
+            <option value="Colleagues">Colleagues</option>
+          </Input>
+          
+<DatePicker
+      selected={this.state.date}
+      onChange={date => this.handleChange}
+      showTimeSelect
+      timeFormat="HH:mm"
+      timeIntervals={15}
+      timeCaption="time"
+      dateFormat="MMMM d, yyyy h:mm aa"
+    />
         </div>
         <div id="build-wrap"></div>
+
         <div
           className="saveDataWrap d-flex justify-content-center"
           style={{ marginTop: "15px" }}

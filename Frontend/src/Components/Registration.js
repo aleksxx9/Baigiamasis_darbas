@@ -7,6 +7,7 @@ import {
   FormGroup,
   Label,
   Card,
+  Input
 } from "reactstrap";
 
 class Registration extends Component {
@@ -17,7 +18,6 @@ class Registration extends Component {
       username: "",
       password: "",
       name: "",
-      role: "",
       credentials: "",
       credentialsSuccess: "",
       jwt: "",
@@ -26,16 +26,12 @@ class Registration extends Component {
 
     this.handleUsername = this.handleUsername.bind(this);
     this.handleName = this.handleName.bind(this);
-    this.handleRole = this.handleRole.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleName(event) {
     this.setState({ name: event.target.value });
-  }
-  handleRole(event) {
-    this.setState({ role: event.target.value });
   }
   handleUsername(event) {
     this.setState({ username: event.target.value });
@@ -55,6 +51,8 @@ class Registration extends Component {
 
   //API call to backend to check credentials
   async toggle() {
+    if(this.state.role == null) await this.setState({role: "Worker"});
+    console.log(this.state.role);
     const url = localStorage.getItem("register");
     try {
       const response = await fetch(url, {
@@ -62,7 +60,7 @@ class Registration extends Component {
         method: "POST",
         body: JSON.stringify({
           name: this.state.name,
-          role: "admin",
+          role: this.state.role,
           email: this.state.username,
           password: this.state.password,
         }),
@@ -99,6 +97,10 @@ class Registration extends Component {
       this.toggle();
     }
   };
+
+  handleSelect = (event) => {
+    this.setState({ role: event.target.value })
+  }
 
   render() {
     return (
@@ -140,7 +142,6 @@ class Registration extends Component {
                     placeholder=""
                   />
                 </FormGroup>
-
                 <FormGroup>
                   <Label for="username" className="float-left">
                     Email
@@ -159,6 +160,20 @@ class Registration extends Component {
                     id="username"
                     placeholder=""
                   />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="role" className="float-left">
+                    Role
+                  </Label>
+                  <Input type="select" name="select" onChange={this.handleSelect} id="exampleSelect">
+                    <option value="Worker">Worker</option>
+                    <option value="Admin">Admin</option>
+                    {
+                      localStorage.getItem("userRole") == 'Super Admin' ? (
+                      <option vlaue="Super Admin">Super Admin</option>)
+                    :(null)
+                    }
+                  </Input>
                 </FormGroup>
                 <FormGroup>
                   <Label for="password" className="float-left">
