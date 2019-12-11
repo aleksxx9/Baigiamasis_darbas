@@ -2,6 +2,9 @@ import $ from "jquery";
 import React, { Component, createRef } from "react";
 import { Button, Input } from "reactstrap";
 import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
+
 window.jQuery = $;
 window.$ = $;
 
@@ -12,7 +15,7 @@ export default class formCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
+      startDate: new Date().getFullYear() + "-" + (new Date().getMonth() +1) + "-" + new Date().getDate() ,
       input: "",
     };
     this.handleinput = this.handleinput.bind(this);
@@ -30,7 +33,7 @@ export default class formCreate extends React.Component {
 
   handleChange = date => {
     this.setState({
-      startDate: date
+      startDate: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
     });
   };
 
@@ -162,16 +165,20 @@ export default class formCreate extends React.Component {
             <option value="Regular users">Regular users</option>
             <option value="Colleagues">Colleagues</option>
           </Input>
-          
-<DatePicker
-      selected={this.state.date}
-      onChange={date => this.handleChange}
-      showTimeSelect
-      timeFormat="HH:mm"
-      timeIntervals={15}
-      timeCaption="time"
-      dateFormat="MMMM d, yyyy h:mm aa"
-    />
+          {/* <div dangerouslySetInnerHTML={{__html: this.state.startDate}} /> */}
+
+          <DatePicker
+            todayButton="Reset"
+            selected={this.state.date}
+            onSelect={this.handleChange}
+            onChange={this.handleChange}
+            // showTimeSelect
+            // timeFormat="HH:mm"
+            // timeIntervals={15}
+            // timeCaption="time"
+            value={this.state.startDate}
+            dateFormat="yyyy/MM/dd"
+          /> 
         </div>
         <div id="build-wrap"></div>
 
