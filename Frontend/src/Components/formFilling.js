@@ -32,6 +32,7 @@ export default class formFilling extends Component {
         method: "GET",
       });
       const data = await response.json();
+      console.log(data);
       this.fillData(data);
       this.setState({ name: data.name });
     } catch (e) {

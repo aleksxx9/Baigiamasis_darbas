@@ -42,16 +42,6 @@ class Login extends Component {
 
   componentDidMount() {
     this.getFormNames();
-    localStorage.setItem("isLogged", false);
-    if (
-      localStorage.getItem("userRole") ||
-      localStorage.getItem("userName") ||
-      localStorage.getItem("jwt")
-    ) {
-      localStorage.removeItem("jwt");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userRole");
-    }
   }
 
   Redirect(name) {
@@ -86,8 +76,7 @@ class Login extends Component {
               let name1 = name.split('\\n');
               let date = new Date();
               let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-              console.log(dateFormat + " " + name1[1] + " " + name1[0] + " " + name1[2]);
-              if(name1[0] == "Everyone" || name1[0] == "Regular users" && Date.parse(name1[1]) >= Date.parse(dateFormat))
+              if(name1[0] == "Everyone" || name1[0] == "Colleagues" && Date.parse(name1[1]) >= Date.parse(dateFormat))
               return (
                 <div
                   key={i}

@@ -8,6 +8,13 @@ const formSchema = new mongoose.Schema({
   data: {
     type: JSON,
   },
+  expirationTime: {
+    type: String
+  },
+  role: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Form", formSchema);

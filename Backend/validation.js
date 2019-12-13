@@ -32,6 +32,8 @@ const formValidation = datacheck => {
   const schema = Joi.object({
     name: Joi.string().required(),
     data: Joi.required(),
+    expirationTime: Joi.string().allow('').optional(),
+    role: Joi.string().required(),
   });
   return schema.validate(datacheck);
 };

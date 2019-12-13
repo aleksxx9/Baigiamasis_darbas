@@ -2,7 +2,7 @@ import $ from "jquery";
 import React, { Component, createRef } from "react";
 import { Button, Input } from "reactstrap";
 import DatePicker from "react-datepicker";
- 
+
 import "react-datepicker/dist/react-datepicker.css";
 
 window.jQuery = $;
@@ -15,7 +15,9 @@ export default class formCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date().getFullYear() + "-" + (new Date().getMonth() +1) + "-" + new Date().getDate() ,
+      //startDate: new Date().getFullYear() + "-" + (new Date().getMonth() +1) + "-" + new Date().getDate() ,
+      role: "Everyone",
+      startDate: "",
       input: "",
     };
     this.handleinput = this.handleinput.bind(this);
@@ -33,21 +35,24 @@ export default class formCreate extends React.Component {
 
   handleChange = date => {
     this.setState({
-      startDate: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() 
+      startDate: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
     });
   };
+
+  handleSelect = (event) => {
+    this.setState({ role: event.target.value })
+  }
 
   async saveForm(data) {
     try {
       await fetch(localStorage.getItem("createForm"), {
         headers: { "Content-Type": "application/json" },
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           name: document.getElementById("name").value,
           data: JSON.parse(data),
+          expirationTime: this.state.startDate,
+          role: this.state.role,
         }),
       });
       alert("Form created successfully");
@@ -160,25 +165,30 @@ export default class formCreate extends React.Component {
             id="name"
             onKeyUp={this.handleKey}
           ></input>
-          <Input type="select" name="select" className="input-group form-control col-2" >
+        </div>
+        <div
+          style={{ marginTop: "25px", marginBottom: "25px" }}
+          className="d-flex justify-content-center"
+        >
+          <br />
+          <Input type="select" name="select" className="input-group form-control col-2 "  style={{marginRight:"50px"}} onChange={this.handleSelect}>
             <option value="Everyone">Everyone</option>
             <option value="Regular users">Regular users</option>
             <option value="Colleagues">Colleagues</option>
           </Input>
-          {/* <div dangerouslySetInnerHTML={{__html: this.state.startDate}} /> */}
 
           <DatePicker
+            className="input-group form-control"
             todayButton="Reset"
             selected={this.state.date}
             onSelect={this.handleChange}
             onChange={this.handleChange}
-            // showTimeSelect
-            // timeFormat="HH:mm"
-            // timeIntervals={15}
-            // timeCaption="time"
             value={this.state.startDate}
             dateFormat="yyyy/MM/dd"
-          /> 
+          />
+          <Button className="btn btn-light" style={{ backgroundColor: "white", border: "1px solid #ced4da" }} onClick={() => {
+            this.setState({startDate: ""});
+          }}> Disable date</Button>
         </div>
         <div id="build-wrap"></div>
 

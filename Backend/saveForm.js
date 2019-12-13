@@ -13,9 +13,12 @@ router.post("/", async (req, res) => {
   if (formExists) {
     return res.status(400).send("Form already exists");
   }
+  
   const form = new Form({
     name: req.body.name,
     data: req.body.data,
+    expirationTime: req.body.expirationTime,
+    role: req.body.role,
   });
   try {
     await form.save();

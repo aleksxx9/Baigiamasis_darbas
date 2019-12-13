@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     let array = [];
     let i = 0;
     data.forEach(name => {
-      array[i] = name.name;
+      array[i] = name.role + "\\n" + name.expirationTime + "\\n" + name.name;
       i++;
     });
     res.send(array);

@@ -14,6 +14,7 @@ import hiring from "./Components/hiring";
 import archiveNames from "./Components/archiveNames";
 import Archive from "./Components/archive";
 import Delete from "./Components/delete";
+import startPage2 from "./Components/startPage2";
 import {
   BrowserRouter as Router,
   Switch,
@@ -54,12 +55,44 @@ const checkAuth = () => {
   }
   return false;
 };
+
+const checkAuth2 = () => {
+  //checks session and returns status
+  const exp = localStorage.getItem("userRole");
+  if (!exp) {
+    return false;
+  }
+  if (exp) {
+    refreshToken();
+    return true;
+  }
+  return false;
+};
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   //On path change/reload/refresh gets passed status and redirects to login page, otherwise in selected one
   <Route
     {...rest}
     render={props =>
       checkAuth() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+          }}
+        />
+      )
+    }
+  />
+);
+
+const PrivateRoute2 = ({ component: Component, ...rest }) => (
+  //On path change/reload/refresh gets passed status and redirects to login page, otherwise in selected one
+  <Route
+    {...rest}
+    render={props =>
+      checkAuth2() ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -85,6 +118,7 @@ class App extends React.Component {
             <PrivateRoute path="/delete" exact component={Delete} />
             <Route path="/login" exact component={Login} />
             <Route path="/formFilling" component={formFilling} />
+            <PrivateRoute2 path="/startPage2" component={startPage2} />
             <PrivateRoute path="/archiveNames" component={archiveNames} />
             <PrivateRoute path="/mainPage" component={mainPage} />
             <PrivateRoute path="/archive" component={Archive} />

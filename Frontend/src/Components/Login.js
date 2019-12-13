@@ -59,13 +59,21 @@ class Login extends Component {
         this.user.focus();
         this.user.select();
       }
-      if (this.state.user != "" && this.state.user != null) {
+      if (this.state.user != "" && this.state.user != null && this.state.user.role != "Worker") {
         localStorage.setItem("jwt", this.state.jwt);
         localStorage.setItem("userName", this.state.user.name);
         localStorage.setItem("userRole", this.state.user.role);
         this.setState({ redirect: true });
+      } else if (this.state.user != "" && this.state.user != null && this.state.user.role == "Worker") {
+        localStorage.setItem("jwt", this.state.jwt);
+        localStorage.setItem("userName", this.state.user.name);
+        localStorage.setItem("userRole", this.state.user.role);
+        console.log(this.state.user);
+        this.setState({ redirect2: true });
       }
-    } else {
+    }
+    else {
+      console.log('123');
       this.setState({ credentials: this.state.jwt, jwt: "" });
     }
   }
@@ -130,6 +138,16 @@ class Login extends Component {
         <Redirect
           to={{
             pathname: "/mainPage",
+          }}
+        />
+      );
+    }
+    if (this.state.redirect2) {
+      localStorage.setItem("isLogged", true);
+      return (
+        <Redirect
+          to={{
+            pathname: "/startPage2",
           }}
         />
       );
