@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
     data: req.body.data,
     expirationTime: req.body.expirationTime,
     role: req.body.role,
+    author: req.body.author,
   });
   try {
     await form.save();

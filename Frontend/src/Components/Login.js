@@ -61,6 +61,7 @@ class Login extends Component {
       }
       if (this.state.user != "" && this.state.user != null && this.state.user.role != "Worker") {
         localStorage.setItem("jwt", this.state.jwt);
+        localStorage.setItem("userDisplay", this.state.user.email);
         localStorage.setItem("userName", this.state.user.name);
         localStorage.setItem("userRole", this.state.user.role);
         this.setState({ redirect: true });
@@ -68,12 +69,10 @@ class Login extends Component {
         localStorage.setItem("jwt", this.state.jwt);
         localStorage.setItem("userName", this.state.user.name);
         localStorage.setItem("userRole", this.state.user.role);
-        console.log(this.state.user);
         this.setState({ redirect2: true });
       }
     }
     else {
-      console.log('123');
       this.setState({ credentials: this.state.jwt, jwt: "" });
     }
   }

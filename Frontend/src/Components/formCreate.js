@@ -53,6 +53,7 @@ export default class formCreate extends React.Component {
           data: JSON.parse(data),
           expirationTime: this.state.startDate,
           role: this.state.role,
+          author: localStorage.getItem("userDisplay"),
         }),
       });
       alert("Form created successfully");

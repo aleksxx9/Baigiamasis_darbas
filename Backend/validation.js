@@ -34,6 +34,7 @@ const formValidation = datacheck => {
     data: Joi.required(),
     expirationTime: Joi.string().allow('').optional(),
     role: Joi.string().required(),
+    author: Joi.string().required(),
   });
   return schema.validate(datacheck);
 };

@@ -58,52 +58,58 @@ class Delete extends Component {
     return (
       <div>
         {//while there's no data dispalys loader
-        this.state.loading || !this.state.data ? (
-          <div
-            className="w-100 d-flex justify-content-center"
-            style={{
-              margin: "0",
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-            }}
-          >
+          this.state.loading || !this.state.data ? (
             <div
-              className="spinner-border text-primary"
-              role="status"
-              style={{ display: this.state.display }}
+              className="w-100 d-flex justify-content-center"
+              style={{
+                margin: "0",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
             >
-              <span className="sr-only">Loading...</span>
+              <div
+                className="spinner-border text-primary"
+                role="status"
+                style={{ display: this.state.display }}
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div style={{ marginTop: "15px" }}>
-            {this.state.data.map((name, i) => {
-              return (
-                <div
-                  key={i}
-                  className="col-12 d-flex justify-content-center"
-                  style={{ marginTop: "10px" }}
-                >
-                  <Button
-                    key={i}
-                    id="button"
-                    className=" btn btn-lg btn-block col-6"
-                    style={{ borderRadius: 0, background: "#2F3E48" }}
-                    onClick={() => {
-                      this.Redirect(name);
-                    }}
-                  >
-                    {name}
-                  </Button>
+          ) : (
+              <div style={{ marginTop: "15px" }}>
+                {this.state.data.map((name, i) => {
+                  return (
+                    <div key={i}>
+                      {
+                        name.author == localStorage.getItem("userDisplay") ? (
+                          <div
+                            key={i}
+                            className="col-12 d-flex justify-content-center"
+                            style={{ marginTop: "10px" }}
+                          >
+                            <Button
+                              key={i}
+                              id="button"
+                              className=" btn btn-lg btn-block col-6"
+                              style={{ borderRadius: 0, background: "#2F3E48" }}
+                              onClick={() => {
+                                this.Redirect(name.name);
+                              }}
+                            >
+                              {name.name}
+                            </Button>
+                          </div>
+                        ) : (<div> </div>)
+                      }
+                    </div>
+                  );
+                })}
+                <div className="text-danger d-flex justify-content-center">
+                  {this.state.error}{" "}
                 </div>
-              );
-            })}
-            <div className="text-danger d-flex justify-content-center">
-              {this.state.error}{" "}
-            </div>
-          </div>
-        )}
+              </div>
+            )}
       </div>
     );
   }

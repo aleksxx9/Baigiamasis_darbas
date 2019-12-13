@@ -83,11 +83,10 @@ class Login extends Component {
         ) : (
           <div style={{ marginTop: "15px" }}>
             {this.state.data.map((name, i) => {
-              let name1 = name.split('\\n');
+              //let name1 = name.split('\\n');
               let date = new Date();
               let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-              console.log(dateFormat + " " + name1[1] + " " + name1[0] + " " + name1[2]);
-              if(name1[0] == "Everyone" || name1[0] == "Regular users" && Date.parse(name1[1]) >= Date.parse(dateFormat))
+              if(name.role == "Everyone" || name.role == "Regular users" && Date.parse(name.expirationTime) >= Date.parse(dateFormat))
               return (
                 <div
                   key={i}
@@ -99,10 +98,10 @@ class Login extends Component {
                     className=" btn btn-lg btn-block col-6"
                     style={{ borderRadius: 0, background: "#2F3E48" }}
                     onClick={() => {
-                      this.Redirect(name1[2]);
+                      this.Redirect(name.name);
                     }}
                   >
-                    {name1[2]}
+                    {name.name}
                   </Button>
                 </div>
               );

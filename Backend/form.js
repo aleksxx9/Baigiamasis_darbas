@@ -15,6 +15,10 @@ const formSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("Form", formSchema);
