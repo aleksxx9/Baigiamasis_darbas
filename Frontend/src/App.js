@@ -14,6 +14,7 @@ import hiring from "./Components/hiring";
 import archiveNames from "./Components/archiveNames";
 import Archive from "./Components/archive";
 import Delete from "./Components/delete";
+import ChangePassword from "./Components/ChangePassword";
 import startPage2 from "./Components/startPage2";
 import {
   BrowserRouter as Router,
@@ -118,6 +119,7 @@ class App extends React.Component {
             <PrivateRoute path="/delete" exact component={Delete} />
             <Route path="/login" exact component={Login} />
             <Route path="/formFilling" component={formFilling} />
+            <Route path="/changePassword" component={ChangePassword} />
             <PrivateRoute2 path="/startPage2" component={startPage2} />
             <PrivateRoute path="/archiveNames" component={archiveNames} />
             <PrivateRoute path="/mainPage" component={mainPage} />
