@@ -5,10 +5,11 @@ router.post("/", async (req, res) => {
   const form = new Form({
     name: req.body.name,
     data: req.body.data,
+    author: req.body.author,
   });
   try {
     await form.save();
-    res.send("Success");
+    res.send("success");
   } catch (e) {
     res.status(400).send(e);
   }

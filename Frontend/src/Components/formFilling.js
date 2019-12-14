@@ -32,9 +32,8 @@ export default class formFilling extends Component {
         method: "GET",
       });
       const data = await response.json();
-      console.log(data);
       this.fillData(data);
-      this.setState({ name: data.name });
+      this.setState({ name: data.name, authors: data.author });
     } catch (e) {
       console.log(e);
       this.setState({ error: e });
@@ -233,15 +232,13 @@ export default class formFilling extends Component {
             onClick={async () => {
               const formData = $("#FormFill").serializeArray();
               try {
-                await fetch(localStorage.getItem("AnswerForm"), {
+                const response = await fetch(localStorage.getItem("AnswerForm"), {
                   headers: { "Content-Type": "application/json" },
                   method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
                   body: JSON.stringify({
                     name: this.state.name,
                     data: formData,
+                    author: this.state.authors,
                   }),
                 });
                 alert("Thanks for filling the form!");

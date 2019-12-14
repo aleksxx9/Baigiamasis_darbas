@@ -32,6 +32,7 @@ export default class Config extends React.Component {
     );
     localStorage.setItem("hiredGet", "http://localhost:3001/api/hiredGet");
     localStorage.setItem("deleteAll", "http://localhost:3001/api/delete");
+    localStorage.setItem("changePassword", "http://localhost:3001/api/changePassword");
   }
   render() {
     return <div></div>;

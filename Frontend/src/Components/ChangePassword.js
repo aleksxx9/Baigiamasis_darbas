@@ -43,24 +43,25 @@ class Login extends Component {
   }
 
   async handleSubmit(event) {
-console.log(localStorage.getItem("userInfo"));
-    //alert(this.state.username + this.state.password);
-    console.log(this.state.jwt);
     if (this.state.newPassword == this.state.repeatPassword) {
       if (this.state.jwt.length > 150) {
-        const url = localStorage.getItem("userInfo");
+        const url = localStorage.getItem("changePassword");
         try {
           const response = await fetch(url, {
             headers: { "Content-Type": "application/json" },
-            method: "get",
-            headers: {
-              auth: this.state.jwt,
-            },
+            method: "PUT",
+            body: JSON.stringify({
+              email:localStorage.getItem("userDisplay"),
+              newPassword:this.state.newPassword,
+              repeatPassword:this.state.repeatPassword,
+              password:this.state.password,
+            })
           });
           this.setState({ credentials: "" });
-          const data = await response.json();
-          this.setState({ user: data });
+          const data = await response.text();
+          this.setState({ user: data, newPassword: "", repeatPassword: "", password: "" });
         } catch (e) {
+          console.log(e)
           this.setState({
             credentials: "Wrong credentials",
             jwt: "",
@@ -68,26 +69,14 @@ console.log(localStorage.getItem("userInfo"));
           this.user.focus();
           this.user.select();
         }
-        if (this.state.credentials == "") console.log("success");
-        // if (this.state.user != "" && this.state.user != null && this.state.user.role != "Worker") {
-        //   localStorage.setItem("jwt", this.state.jwt);
-        //   localStorage.setItem("userDisplay", this.state.user.email);
-        //   localStorage.setItem("userName", this.state.user.name);
-        //   localStorage.setItem("userRole", this.state.user.role);
-        //   this.setState({ redirect: true });
-        // } else if (this.state.user != "" && this.state.user != null && this.state.user.role == "Worker") {
-        //   localStorage.setItem("jwt", this.state.jwt);
-        //   localStorage.setItem("userName", this.state.user.name);
-        //   localStorage.setItem("userRole", this.state.user.role);
-        //   this.setState({ redirect2: true });
-        // }
+        if (this.state.credentials == "") this.setState({ credentials: "Success" });
       }
       else {
         this.setState({ credentials: this.state.jwt, jwt: "" });
       }
     }
     else {
-      this.setState({credentials: "Passwords doesn't match"});
+      this.setState({ credentials: "Passwords doesn't match" });
     }
   }
 
@@ -254,7 +243,8 @@ console.log(localStorage.getItem("userInfo"));
                 >
                   Change password
                 </Button>
-                <div style={{ color: "red" }}>{this.state.credentials}</div>
+                {this.state.credentials == "Success" ? (<div style={{ color: "green" }}>{this.state.credentials}</div>) : (<div style={{ color: "red" }}>{this.state.credentials}</div>)}
+
               </Form>
             </CardBody>
           </Card>

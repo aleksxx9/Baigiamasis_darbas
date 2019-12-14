@@ -119,7 +119,7 @@ class App extends React.Component {
             <PrivateRoute path="/delete" exact component={Delete} />
             <Route path="/login" exact component={Login} />
             <Route path="/formFilling" component={formFilling} />
-            <Route path="/changePassword" component={ChangePassword} />
+            <PrivateRoute2 path="/changePassword" component={ChangePassword} />
             <PrivateRoute2 path="/startPage2" component={startPage2} />
             <PrivateRoute path="/archiveNames" component={archiveNames} />
             <PrivateRoute path="/mainPage" component={mainPage} />

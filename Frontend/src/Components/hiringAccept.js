@@ -38,37 +38,39 @@ export default class hiringAccept extends Component {
 
   async componentDidMount() {
     await this.getForm();
-    const s = document.createElement("script");
-    s.type = "text/javascript";
-    s.async = true;
-    
-    s.innerHTML =
-      'function sendData(id) {let data = document.getElementById(id); sendData1(data)  }  async function sendData1(hired) {var id = hired.id;'+
-      'const name1 = $(document.getElementById("Name")).prop("innerHTML");' +
-      'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = newMessage.replace(/<\\/?("[^"]*"|\'[^\']*\'|[^>])*(>|$)/g, " ");'+
-      'try {const response = await fetch("' +
-      localStorage.getItem("hireSend") +
-      "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
-      "name1" +
-      ', data: newMessage,}),});  try {const response = await fetch("' +
-      localStorage.getItem("hireSendDelete")  +
-      "\", {headers: {'Content-Type':'application/json', name:" +
-      "id" +
-      ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}} catch (e) {console.log(e);}}";
-      if (this.instance != null) this.instance.appendChild(s);
+    if (this.state.data[0]) {
+      const s = document.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      ; s.innerHTML =
+        'function sendData(id) {let data = document.getElementById(id); sendData1(data)  }  async function sendData1(hired) {var id = hired.id;' +
+        'const name1 = $(document.getElementById("Name")).prop("innerHTML");' +
+        'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = newMessage.replace(/<\\/?("[^"]*"|\'[^\']*\'|[^>])*(>|$)/g, " ");' +
+        'try {const response = await fetch("' +
+        localStorage.getItem("hireSend") +
+        "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
+        "name1" +
+        ', data: newMessage, author: ' + JSON.stringify(this.state.data[0].author) + '}),});}catch (e) {} try {const response = await fetch("' +
+        localStorage.getItem("hireSendDelete") +
+        "\", {headers: {'Content-Type':'application/json', name:" +
+        "id" +
+        ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}}";
+      //+ 'catch (e) {console.log(e);}}';
+      if (this.instance) this.instance.appendChild(s);
 
-    const del = document.createElement("script");
-    del.type = "text/javascript";
-    del.async = true;
+      const del = document.createElement("script");
+      del.type = "text/javascript";
+      del.async = true;
 
-    del.innerHTML =
-      'function declineData(id) {let data = document.getElementById(id);  deleteData(data)  }  async function deleteData(hired) {var id = hired.id; ;   try {const response = await fetch("' +
-      localStorage.getItem("hireSendDelete") +
-      "\", {headers: {'Content-Type':'application/json', name:" +
-      "id" +
-      ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
+      del.innerHTML =
+        'function declineData(id) {let data = document.getElementById(id);  deleteData(data)  }  async function deleteData(hired) {var id = hired.id; ;   try {const response = await fetch("' +
+        localStorage.getItem("hireSendDelete") +
+        "\", {headers: {'Content-Type':'application/json', name:" +
+        "id" +
+        ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
 
-    if (this.delete != null) this.delete.appendChild(del);
+      if (this.delete != null) this.delete.appendChild(del);
+    }
   }
 
   render() {
@@ -81,7 +83,7 @@ export default class hiringAccept extends Component {
               const newElem = elem.data;
               data =
                 data +
-                "<div '><div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default' " +
+                "<div><div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default' " +
                 ">" +
                 newElem[0].value +
                 " " +
@@ -105,8 +107,8 @@ export default class hiringAccept extends Component {
             })}
           </div>
         ) : (
-          <div />
-        )}
+            <div />
+          )}
         <br />
         <div className=" d-flex  justify-content-center">
           <h1 id="Name">{this.state.name}</h1>

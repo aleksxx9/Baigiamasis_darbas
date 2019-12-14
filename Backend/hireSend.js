@@ -8,6 +8,10 @@ const formSchema = new mongoose.Schema({
   data: {
     type: String,
   },
+  author: {
+    type: JSON,
+    rewuired: true,
+  }
 });
 
 module.exports = mongoose.model("Hired", formSchema);

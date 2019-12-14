@@ -82,25 +82,35 @@ class Delete extends Component {
                   return (
                     <div key={i}>
                       {
-                        name.author == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin" ? (
-                          <div
-                            key={i}
-                            className="col-12 d-flex justify-content-center"
-                            style={{ marginTop: "10px" }}
-                          >
-                            <Button
-                              key={i}
-                              id="button"
-                              className=" btn btn-lg btn-block col-6"
-                              style={{ borderRadius: 0, background: "#2F3E48" }}
-                              onClick={() => {
-                                this.Redirect(name.name);
-                              }}
-                            >
-                              {name.name}
-                            </Button>
-                          </div>
-                        ) : (<div> </div>)
+                        name.author.map((auth, j) => {
+                          return (
+                            <div key={j}>
+                              {
+                                (auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") 
+                                  ? (
+                                    <div
+                                      key={j}
+                                      className="col-12 d-flex justify-content-center"
+                                      style={{ marginTop: "10px" }}
+                                    >
+                                      <Button
+                                        key={j}
+                                        id="button"
+                                        className=" btn btn-lg btn-block col-6"
+                                        style={{ borderRadius: 0, background: "#2F3E48" }}
+                                        onClick={() => {
+                                          this.Redirect(name.name);
+                                        }}
+                                      >
+                                        {name.name}
+                                      </Button>
+                                    </div>
+                                  ) : (<div key={j}> </div>)
+                              }
+                            </div>
+                          );
+                        }
+                        )
                       }
                     </div>
                   );
