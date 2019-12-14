@@ -52,7 +52,6 @@ class Registration extends Component {
   //API call to backend to check credentials
   async toggle() {
     if(this.state.role == null) await this.setState({role: "Worker"});
-    console.log(this.state.role);
     const url = localStorage.getItem("register");
     try {
       const response = await fetch(url, {
@@ -67,7 +66,6 @@ class Registration extends Component {
       });
       //this.setState({ credentials: "" });
       const data = await response.text();
-      console.log(data);
       if (data == "Success" || data == "{}") {
         this.setState({ credentialsSuccess: data });
         this.setState({ credentials: "" });

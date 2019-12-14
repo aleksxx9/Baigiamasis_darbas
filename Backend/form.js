@@ -16,8 +16,7 @@ const formSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: String,
-    required: true,
+    type: JSON,
   }
 });
 

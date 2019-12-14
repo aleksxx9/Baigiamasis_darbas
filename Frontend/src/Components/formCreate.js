@@ -44,6 +44,7 @@ export default class formCreate extends React.Component {
   }
 
   async saveForm(data) {
+    console.log(data);
     try {
       await fetch(localStorage.getItem("createForm"), {
         headers: { "Content-Type": "application/json" },
@@ -140,7 +141,7 @@ export default class formCreate extends React.Component {
       if (document.getElementById("name").value) {
         this.saveForm(formBuilder.actions.save());
         formBuilder.actions.clearFields();
-        window.location.reload();
+        //window.location.reload();
       } else {
         alert("Form name is required");
         this.input.focus();

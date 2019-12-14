@@ -82,7 +82,7 @@ class Delete extends Component {
                   return (
                     <div key={i}>
                       {
-                        name.author == localStorage.getItem("userDisplay") ? (
+                        name.author == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin" ? (
                           <div
                             key={i}
                             className="col-12 d-flex justify-content-center"
