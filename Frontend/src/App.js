@@ -17,6 +17,7 @@ import Delete from "./Components/delete";
 import ChangePassword from "./Components/ChangePassword";
 import startPage2 from "./Components/startPage2";
 import formShare from "./Components/formShare";
+import deleteUser from "./Components/deleteUser";
 import {
   BrowserRouter as Router,
   Switch,
@@ -120,6 +121,7 @@ class App extends React.Component {
             <PrivateRoute path="/delete" exact component={Delete} />
             <Route path="/login" exact component={Login} />
             <Route path="/formFilling" component={formFilling} />
+            <PrivateRoute path="/deleteUser" component={deleteUser} />
             <PrivateRoute2 path="/changePassword" component={ChangePassword} />
             <PrivateRoute2 path="/startPage2" component={startPage2} />
             <PrivateRoute path="/archiveNames" component={archiveNames} />

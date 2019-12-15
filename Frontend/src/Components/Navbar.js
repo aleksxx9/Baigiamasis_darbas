@@ -92,6 +92,7 @@ class Nav extends React.Component {
                 ></NavbarBrand>
               </div>
               <div className="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right">
+              {localStorage.getItem("userRole") == "Super Admin" ? (
               <Button
                   id="Popover1"
                   style={{
@@ -99,9 +100,11 @@ class Nav extends React.Component {
                     border: "none",
                     outline: "none",
                   }}
-                  onClick={() => this.props.history.push("/Registration")}>
+                  onClick={() => this.props.history.push("/deleteUser")}>
                   <MdDelete size="25px" style={{ marginRight: "5px" }} />
                 </Button>
+              ) : (<div></div>)
+              }
                 <Button
                   id="Popover1"
                   style={{
