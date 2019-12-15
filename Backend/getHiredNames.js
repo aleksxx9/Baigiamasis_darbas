@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     let array = [];
     let i = 0;
     data.forEach(name => {
-      array[i] = name.name;
+      array[i] = ({author: name.author, name: name.name});
       i++;
     });
     let unique = {};

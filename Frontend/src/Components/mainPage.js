@@ -54,6 +54,20 @@ export default class mainPage extends React.Component {
                   marginBottom: "10%",
                   fontWeight: "bold",
                 }}
+                onClick={() => this.props.history.push("/formShare")}
+              >
+                Share forms
+              </Button>
+            </span>
+            <span className="d-block">
+              <Button
+                style={{
+                  borderRadius: "0",
+                  padding: "10%",
+                  width: "100%",
+                  marginBottom: "10%",
+                  fontWeight: "bold",
+                }}
                 onClick={() => this.props.history.push("/delete")}
               >
                 Delete form

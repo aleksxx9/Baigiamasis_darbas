@@ -65,21 +65,38 @@ class archiveNames extends Component {
           <div style={{ marginTop: "15px" }}>
             {this.state.data.map((name, i) => {
               return (
-                <div
-                  key={i}
-                  className="col-12 d-flex justify-content-center"
-                  style={{ marginTop: "10px" }}
-                >
-                  <Button
-                    key={i}
-                    className=" btn btn-lg btn-block col-6"
-                    style={{ borderRadius: 0, background: "#2F3E48" }}
-                    onClick={() => {
-                      this.Redirect(name);
-                    }}
-                  >
-                    {name}
-                  </Button>
+                <div key={i}>
+                  {
+                    name.author.map((auth, j) => {
+                      return (
+                        <div key={j}>
+                          {
+                            (auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") 
+                              ? (
+                                <div
+                                  key={j}
+                                  className="col-12 d-flex justify-content-center"
+                                  style={{ marginTop: "10px" }}
+                                >
+                                  <Button
+                                    key={j}
+                                  
+                                    className=" btn btn-lg btn-block col-6"
+                                    style={{ borderRadius: 0, background: "#2F3E48" }}
+                                    onClick={() => {
+                                      this.Redirect(name.name);
+                                    }}
+                                  >
+                                    {name.name}
+                                  </Button>
+                                </div>
+                              ) : (<div key={j}> </div>)
+                          }
+                        </div>
+                      );
+                    }
+                    )
+                  }
                 </div>
               );
             })}

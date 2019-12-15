@@ -4,6 +4,7 @@ import { FaHome, FaUserPlus } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
 import { GoSignIn } from "react-icons/go";
 import { GoPerson } from "react-icons/go";
+import { MdDelete } from "react-icons/md";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -91,6 +92,16 @@ class Nav extends React.Component {
                 ></NavbarBrand>
               </div>
               <div className="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right">
+              <Button
+                  id="Popover1"
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  onClick={() => this.props.history.push("/Registration")}>
+                  <MdDelete size="25px" style={{ marginRight: "5px" }} />
+                </Button>
                 <Button
                   id="Popover1"
                   style={{
@@ -99,7 +110,7 @@ class Nav extends React.Component {
                     outline: "none",
                   }}
                   onClick={() => this.props.history.push("/Registration")}>
-                  <FaUserPlus size="25px" style={{ marginRight: "15px" }} />
+                  <FaUserPlus size="25px" style={{ marginRight: "5px" }} />
                 </Button>
                 <Button
                   id="Popover"

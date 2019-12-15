@@ -19,6 +19,8 @@ const DeleteForm = require("./deleteFillForm");
 const cors = require("cors");
 const changePassword = require("./changePassword");
 const addAuthor = require('./addAuthor');
+const userNames = require('./getUserNames');
+const getFormShareNames = require('./getFormShareNames');
 
 dotenv.config();
 
@@ -46,6 +48,8 @@ app.use("/api/getFormNames", getFormNames);
 app.use("/api/refreshToken", refreshToken);
 app.use("/api/changePassword", changePassword);
 app.use("/api/addAuthor", addAuthor);
+app.use("/api/getUserNames", userNames);
+app.use("/api/getFormShareNames", getFormShareNames);
 
 
 app.listen(3001, console.log("..."));

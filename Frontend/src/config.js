@@ -33,6 +33,9 @@ export default class Config extends React.Component {
     localStorage.setItem("hiredGet", "http://localhost:3001/api/hiredGet");
     localStorage.setItem("deleteAll", "http://localhost:3001/api/delete");
     localStorage.setItem("changePassword", "http://localhost:3001/api/changePassword");
+    localStorage.setItem("getUserNames", "http://localhost:3001/api/getUserNames");
+    localStorage.setItem("addAuth", "http://localhost:3001/api/addAuthor");
+    localStorage.setItem("getFormShareNames", "http://localhost:3001/api/getFormShareNames");
   }
   render() {
     return <div></div>;
