@@ -18,6 +18,8 @@ import ChangePassword from "./Components/ChangePassword";
 import startPage2 from "./Components/startPage2";
 import formShare from "./Components/formShare";
 import deleteUser from "./Components/deleteUser";
+import Statistics from "./Components/Statistics";
+import Prolong from "./Components/Prolong";
 import {
   BrowserRouter as Router,
   Switch,
@@ -123,6 +125,8 @@ class App extends React.Component {
             <Route path="/formFilling" component={formFilling} />
             <PrivateRoute path="/deleteUser" component={deleteUser} />
             <PrivateRoute2 path="/changePassword" component={ChangePassword} />
+            <PrivateRoute2 path="/Prolong" component={Prolong} />
+            <PrivateRoute2 path="/Statistics" component={Statistics} />
             <PrivateRoute2 path="/startPage2" component={startPage2} />
             <PrivateRoute path="/archiveNames" component={archiveNames} />
             <PrivateRoute path="/formShare" component={formShare} />

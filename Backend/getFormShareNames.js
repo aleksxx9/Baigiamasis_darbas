@@ -11,14 +11,14 @@ router.get("/", async (req, res) => {
     data.forEach(name => {
       show = 0;
       name.author.forEach(author => {
-        if (req.headers.name == author.name)
+        if (req.headers.name == author.name || req.headers.role == "Super Admin")
         {
           show = 1;
         }
       })
       if (show == 1)
       {
-        array[i] = ({ role: name.role, expirationTime: name.expirationTime, author: name.author, name: name.name, author: name.author});
+        array[i] = ({ role: name.role, expirationTime: name.expirationTime, author: name.author, name: name.name, author: name.author, expiration: name.expirationTime});
         i++;
       }
      

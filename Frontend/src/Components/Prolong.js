@@ -10,9 +10,11 @@ import {
   Card,
   Input,
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import DatePicker from "react-datepicker";
 
-class Share extends Component {
+import "react-datepicker/dist/react-datepicker.css";
+
+class Prolong extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,26 +24,32 @@ class Share extends Component {
       user: "",
       authors: "",
       distinct: "",
+      startDate: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange = date => {
+    this.setState({
+      startDate: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    });
+  };
 
   handleSelectChange = async (event) => {
     await this.setState({
       result: event.target.value
     })
-    this.changeOptions();
+    //this.changeOptions();
   }
 
-  async changeOptions()
-  {
-      this.state.data.map((res) => {
-        if (this.state.result == res.name) {
-          this.setState({ authors: res.author })
-        }
-      })
-      let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
-      await this.setState({ distinct: results});
+  async changeOptions() {
+    this.state.data.map((res) => {
+      if (this.state.result == res.name) {
+        this.setState({ authors: res.author })
+      }
+    })
+    let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
+    await this.setState({ distinct: results });
   }
 
   handleSelectUserChange = (event) => {
@@ -50,19 +58,19 @@ class Share extends Component {
     })
   }
 
-handleSubmit(event) {
-    const url = localStorage.getItem("addAuth");
+  handleSubmit(event) {
+    const url = localStorage.getItem("updateDate");
     try {
-    fetch(url, {
+      fetch(url, {
         headers: { "Content-Type": "application/json" },
         method: "PUT",
         body: JSON.stringify({
           name: this.state.result,
-          author: this.state.user
+          expiration: this.state.startDate,
         })
       });
       this.setState({ credentials: "" });
- 
+
     } catch (e) {
       console.log(e)
     }
@@ -71,17 +79,7 @@ handleSubmit(event) {
 
   //API call to backend to check credentials
   async toggle() {
-    if (this.state.user == "") {
-      if (this.state.distinct)
-      {
-        await this.setState({user: this.state.distinct[0].email})
-        this.handleSubmit();
-      }
-    }
-    else {
-      this.setState({ credentials: "" });
-      this.handleSubmit();
-    }
+    this.handleSubmit();
   }
 
 
@@ -96,23 +94,11 @@ handleSubmit(event) {
         method: "GET",
       });
       const data = await response.json();
-      const response2 = await fetch(localStorage.getItem("getUserNames"), {
-        headers: { "Content-Type": "application/json" },
-        method: "GET",
-
-      });
-      const data2 = await response2.json();
       if (!data[0])
         this.setState({
           error: "Sorry, currently there are no available positions!",
         });
-      this.setState({ result: data[0].name, data: data, username: data2 });
-      this.state.data.map(async (res) => {
-        if (data2[0].name != res.name) {
-         await  this.setState({ authors: res.author })
-          this.changeOptions();
-        }
-      })
+      this.setState({ result: data[0].name, data: data });
 
     } catch (e) {
       this.setState({ error: e });
@@ -159,24 +145,37 @@ handleSubmit(event) {
                 </FormGroup>
                 <FormGroup>
                   <Label for="role" className="float-left">
-                    Select person with whom you want to share:
+                    Current Date:
                   </Label>
-                  <Input type="select" name="select"  onClick={this.handleSelectUserChange}>
-                    {
-                      this.state.distinct ? (
-                        this.state.distinct.map((name, i) => {
-                          return (
-                            name.email != localStorage.getItem("userDisplay") ? (
-                            <option key={i}>
-                              {name.email}
-                            </option>
-                            ) : (<option hidden></option>)
-                          );
-                        })
-                      ) : (<option hidden></option>)
-                    }
-                  </Input>
+                  <Label for="role" className="float-left">
+                    {this.state.data ? (this.state.data.map((data, i) => {
+                      return (
+                      <div key={i}>
+                      {
+                        data.name == this.state.result ? (<div style={{marginLeft:"5px"}} key={i}>{data.expiration}</div>) : (<div key={i}></div>)
+                      }
+                      </div>
+                      );
+                    })) : (<div ></div>)}
+                  </Label>
+
                 </FormGroup>
+                <FormGroup>
+                  <Label>
+                    Change or set date
+                  </Label>
+                  <br />
+                  <DatePicker
+                    className="form-control"
+                    todayButton="Reset"
+                    selected={this.state.date}
+                    onSelect={this.handleChange}
+                    onChange={this.handleChange}
+                    value={this.state.startDate}
+                    dateFormat="yyyy/MM/dd"
+                  />
+                </FormGroup>
+
                 <Button
                   onClick={() => {
                     this.toggle();
@@ -188,13 +187,13 @@ handleSubmit(event) {
                     opacity: ".65",
                   }}
                 >
-                  Share
+                  Change date
                 </Button>
                 <div style={{ color: "red" }}>{this.state.credentials}</div>
                 <div style={{ color: "green" }}>
                   {this.state.credentialsSuccess}
                 </div>
-              </Form>
+              </Form><Label style={{fontSize: "12px"}}>Note: by leaving field empty form wont have expiration time</Label>
             </CardBody>
           </Card>
         </div>
@@ -202,5 +201,4 @@ handleSubmit(event) {
     );
   }
 }
-
-export default Share;
+export default Prolong;

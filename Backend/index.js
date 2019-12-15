@@ -23,6 +23,7 @@ const userNames = require('./getUserNames');
 const getFormShareNames = require('./getFormShareNames');
 const getDeleteNames = require('./getDeleteNames');
 const deleteUser = require('./deleteUser');
+const updateDate = require('./updateDate');
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/getUserNames", userNames);
 app.use("/api/getFormShareNames", getFormShareNames);
 app.use("/api/getDeleteNames", getDeleteNames);
 app.use("/api/deleteUser", deleteUser);
+app.use("/api/updateDate", updateDate);
 
 
 app.listen(3001, console.log("..."));

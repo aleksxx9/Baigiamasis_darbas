@@ -21,7 +21,7 @@ export default class mainPage extends React.Component {
               <Button
                 style={{
                   borderRadius: "0",
-                  padding: "10%",
+                  padding: "5%",
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
@@ -35,7 +35,7 @@ export default class mainPage extends React.Component {
               <Button
                 style={{
                   borderRadius: "0",
-                  padding: "10%",
+                  padding: "5%",
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
@@ -49,7 +49,7 @@ export default class mainPage extends React.Component {
               <Button
                 style={{
                   borderRadius: "0",
-                  padding: "10%",
+                  padding: "5%",
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
@@ -63,7 +63,35 @@ export default class mainPage extends React.Component {
               <Button
                 style={{
                   borderRadius: "0",
-                  padding: "10%",
+                  padding: "5%",
+                  width: "100%",
+                  marginBottom: "10%",
+                  fontWeight: "bold",
+                }}
+                onClick={() => this.props.history.push("/Prolong")}
+              >
+                Prolong or set dates to forms
+              </Button>
+            </span>
+            <span className="d-block">
+              <Button
+                style={{
+                  borderRadius: "0",
+                  padding: "5%",
+                  width: "100%",
+                  marginBottom: "10%",
+                  fontWeight: "bold",
+                }}
+                onClick={() => this.props.history.push("/Statistics")}
+              >
+                Statistics
+              </Button>
+            </span>
+            <span className="d-block">
+              <Button
+                style={{
+                  borderRadius: "0",
+                  padding: "5%",
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
@@ -77,7 +105,7 @@ export default class mainPage extends React.Component {
               <Button
                 style={{
                   borderRadius: "0",
-                  padding: "10%",
+                  padding: "5%",
                   width: "100%",
                   fontWeight: "bold",
                 }}

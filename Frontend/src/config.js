@@ -38,6 +38,7 @@ export default class Config extends React.Component {
     localStorage.setItem("getFormShareNames", "http://localhost:3001/api/getFormShareNames");
     localStorage.setItem("getDeleteNames", "http://localhost:3001/api/getDeleteNames");
     localStorage.setItem("deleteUser", "http://localhost:3001/api/deleteUser");
+    localStorage.setItem("updateDate", "http://localhost:3001/api/updateDate");
   }
   render() {
     return <div></div>;
