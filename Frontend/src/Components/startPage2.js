@@ -75,7 +75,7 @@ class Login extends Component {
             {this.state.data.map((name, i) => {
               let date = new Date();
               let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-              if(name.role == "Everyone" || name.role == "Colleagues" && Date.parse(name.expirationTime) >= Date.parse(dateFormat))
+              if((name.role == "Everyone" || name.role == "Colleagues") && (Date.parse(name.expirationTime) >= Date.parse(dateFormat) || name.expirationTime == ""))
               return (
                 <div
                   key={i}

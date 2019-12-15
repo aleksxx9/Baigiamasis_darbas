@@ -25,6 +25,7 @@ export default class hiringAccept extends Component {
         method: "GET",
       });
       const data = await response.json();
+      console.log(data);
       if (!data) {
         this.props.history.push("/mainPage");
       }
@@ -55,20 +56,16 @@ export default class hiringAccept extends Component {
         "\", {headers: {'Content-Type':'application/json', name:" +
         "id" +
         ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}}";
-      //+ 'catch (e) {console.log(e);}}';
       if (this.instance) this.instance.appendChild(s);
-
       const del = document.createElement("script");
       del.type = "text/javascript";
       del.async = true;
-
       del.innerHTML =
         'function declineData(id) {let data = document.getElementById(id);  deleteData(data)  }  async function deleteData(hired) {var id = hired.id; ;   try {const response = await fetch("' +
         localStorage.getItem("hireSendDelete") +
         "\", {headers: {'Content-Type':'application/json', name:" +
         "id" +
         ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
-
       if (this.delete != null) this.delete.appendChild(del);
     }
   }

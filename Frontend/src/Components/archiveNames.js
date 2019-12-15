@@ -14,9 +14,6 @@ class archiveNames extends Component {
       const response = await fetch(localStorage.getItem("getHiredNames"), {
         headers: { "Content-Type": "application/json" },
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       const data = await response.json();
@@ -40,6 +37,7 @@ class archiveNames extends Component {
     this.props.history.push("/archive");
   }
   render() {
+    let admin = 0;
     return (
       <div>
         {//while there's no data dispalys loader
@@ -64,6 +62,7 @@ class archiveNames extends Component {
         ) : (
           <div style={{ marginTop: "15px" }}>
             {this.state.data.map((name, i) => {
+              admin=1;
               return (
                 <div key={i}>
                   {
@@ -71,8 +70,10 @@ class archiveNames extends Component {
                       return (
                         <div key={j}>
                           {
-                            (auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") 
-                              ? (
+                            ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1) 
+                              ? ( <div> 
+                                {
+                                  localStorage.getItem("userRole") == "Super Admin" ? (admin=0,<div></div>) : (<div></div>)}
                                 <div
                                   key={j}
                                   className="col-12 d-flex justify-content-center"
@@ -89,6 +90,7 @@ class archiveNames extends Component {
                                   >
                                     {name.name}
                                   </Button>
+                                  </div>
                                 </div>
                               ) : (<div key={j}> </div>)
                           }

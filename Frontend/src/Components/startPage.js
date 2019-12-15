@@ -86,7 +86,7 @@ class Login extends Component {
               //let name1 = name.split('\\n');
               let date = new Date();
               let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-              if(name.role == "Everyone" || name.role == "Regular users" && Date.parse(name.expirationTime) >= Date.parse(dateFormat))
+              if((name.role == "Everyone" || name.role == "Regular users") && (Date.parse(name.expirationTime) >= Date.parse(dateFormat) || name.expirationTime == ""))
               return (
                 <div
                   key={i}

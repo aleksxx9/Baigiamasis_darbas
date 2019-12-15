@@ -39,6 +39,8 @@ export default class Config extends React.Component {
     localStorage.setItem("getDeleteNames", "http://localhost:3001/api/getDeleteNames");
     localStorage.setItem("deleteUser", "http://localhost:3001/api/deleteUser");
     localStorage.setItem("updateDate", "http://localhost:3001/api/updateDate");
+    localStorage.setItem("popularHired", "http://localhost:3001/api/popularHired");
+    localStorage.setItem("popularAnswer", "http://localhost:3001/api/popularAnswer");
   }
   render() {
     return <div></div>;

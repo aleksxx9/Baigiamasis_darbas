@@ -40,6 +40,7 @@ class Hiring extends Component {
     this.props.history.push("/hiringAccept");
   }
   render() {
+    let admin = 0;
     return (
       <div>
         {//while there's no data dispalys loader
@@ -64,6 +65,7 @@ class Hiring extends Component {
         ) : (
           <div style={{ marginTop: "15px" }}>
             {this.state.data.map((name, i) => {
+              admin=1;
               return (
                 <div key={i}>
                   {
@@ -71,8 +73,10 @@ class Hiring extends Component {
                       return (
                         <div key={j}>
                           {
-                            (auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") 
-                              ? (
+                             ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1) 
+                             ? ( <div> 
+                               {
+                                 localStorage.getItem("userRole") == "Super Admin" ? (admin=0,<div></div>) : (<div></div>)}
                                 <div
                                   key={j}
                                   className="col-12 d-flex justify-content-center"
@@ -88,6 +92,7 @@ class Hiring extends Component {
                                   >
                                     {name.name}
                                   </Button>
+                                </div>
                                 </div>
                               ) : (<div key={j}> </div>)
                           }

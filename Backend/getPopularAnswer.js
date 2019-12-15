@@ -7,15 +7,11 @@ router.get("/", async (req, res) => {
     let array = [];
     let i = 0;
     data.forEach(name => {
-      array[i] = ({expirationTime: name.expirationTime, name: name.name, author: name.author});;
+      array[i] = ({name: name.name});;
       i++;
     });
 
-const newArr = Array.from(new Set(array.map(s => s.name)))
-.map ( name => {
-  return array.find(s => s.name == name)
-})
-res.send(newArr);
+  res.send(array);
   } catch (error) {
     res.status(500).send(error);
   }

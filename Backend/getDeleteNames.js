@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
     let array = [];
     let i = 0;
     data.forEach(name => {
+      if (name.email !=  req.headers.name)
         array[i] = ({ email: name.email});;
         i++;
     });

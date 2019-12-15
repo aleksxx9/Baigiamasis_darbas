@@ -61,9 +61,8 @@ async handleSubmit(event) {
   async getFormNames() {
     try {
       const response = await fetch(localStorage.getItem("getDeleteNames"), {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", name:  localStorage.getItem("userDisplay") },
         method: "GET",
-
       });
       const data = await response.json();
       if (!data[0])
@@ -77,28 +76,6 @@ async handleSubmit(event) {
   }
 
   render() {
-    let joined = "";
-    //redirects to main page if login was successfull
-    if (this.state.redirect) {
-      localStorage.setItem("isLogged", true);
-      return (
-        <Redirect
-          to={{
-            pathname: "/mainPage",
-          }}
-        />
-      );
-    }
-    if (this.state.redirect2) {
-      localStorage.setItem("isLogged", true);
-      return (
-        <Redirect
-          to={{
-            pathname: "/startPage2",
-          }}
-        />
-      );
-    }
     return (
       <div>
         <div
@@ -147,7 +124,7 @@ async handleSubmit(event) {
                     opacity: ".65",
                   }}
                 >
-                  Share
+                  Delete
                 </Button>
                 <div style={{ color: "red" }}>{this.state.credentials}</div>
                 <div style={{ color: "green" }}>
