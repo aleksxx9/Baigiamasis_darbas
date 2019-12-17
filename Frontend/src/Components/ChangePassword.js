@@ -82,7 +82,6 @@ class Login extends Component {
 
   //API call to backend to check credentials
   async toggle() {
-
     const url = localStorage.getItem("login");
     try {
       const response = await fetch(url, {
