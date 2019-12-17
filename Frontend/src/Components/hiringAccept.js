@@ -25,7 +25,6 @@ export default class hiringAccept extends Component {
         method: "GET",
       });
       const data = await response.json();
-      console.log(data);
       if (!data) {
         this.props.history.push("/mainPage");
       }
@@ -52,7 +51,7 @@ export default class hiringAccept extends Component {
         "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
         "name1" +
         ', data: newMessage, author: ' + JSON.stringify(this.state.data[0].author) + '}),});}catch (e) {} try {const response = await fetch("' +
-        localStorage.getItem("hireSendDelete") +
+        localStorage.getItem("hireSendDelete2") +
         "\", {headers: {'Content-Type':'application/json', name:" +
         "id" +
         ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}}";
@@ -65,7 +64,7 @@ export default class hiringAccept extends Component {
         localStorage.getItem("hireSendDelete") +
         "\", {headers: {'Content-Type':'application/json', name:" +
         "id" +
-        ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
+        ",},method: 'PUT',}); const data = await response.text(); window.location.reload()} catch (e) {console.log(e);} }";
       if (this.delete != null) this.delete.appendChild(del);
     }
   }
@@ -77,30 +76,36 @@ export default class hiringAccept extends Component {
         {this.state.data ? (
           <div>
             {this.state.data.map(elem => {
-              const newElem = elem.data;
-              data =
-                data +
-                "<div><div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default' " +
-                ">" +
-                newElem[0].value +
-                " " +
-                newElem[1].value +
-                "</div><div class='panel '><p><form id='" +
-                elem._id +
-                "'>";
-
-              newElem.map(e => {
-                data = data + "<b>" + e.name + ":</b> " + e.value + "<br />";
-              });
-              data =
-                data +
-                "</form></p><button onClick=\"sendData('" +
-                elem._id +
-                "')\" class='float-right btn btn-success'>Accept</button><button onClick=\"declineData('" +
-                elem._id +
-                "')\" style='margin-bottom:15px; margin-right:15px' class='float-right btn btn-danger'>Decline</button><br /></div></div>";
-
-              document.getElementById("form").innerHTML = data + "</div>";
+              if (!elem.status) {
+                if (elem.status != "declined") 
+                {
+                  const newElem = elem.data;
+                  data =
+                    data +
+                    "<div><div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default' " +
+                    ">" +
+                    newElem[0].value +
+                    " " +
+                    newElem[1].value +
+                    "</div><div class='panel '><p><form id='" +
+                    elem._id +
+                    "'>";
+    
+                  newElem.map(e => {
+                    data = data + "<b>" + e.name + ":</b> " + e.value + "<br />";
+                  });
+                  data =
+                    data +
+                    "</form></p><button onClick=\"sendData('" +
+                    elem._id +
+                    "')\" class='float-right btn btn-success'>Accept</button><button onClick=\"declineData('" +
+                    elem._id +
+                    "')\" style='margin-bottom:15px; margin-right:15px' class='float-right btn btn-danger'>Decline</button><br /></div></div>";
+    
+                  document.getElementById("form").innerHTML = data + "</div>";
+                }
+              }
+              
             })}
           </div>
         ) : (

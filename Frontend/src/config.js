@@ -27,6 +27,10 @@ export default class Config extends React.Component {
       "http://localhost:3001/api/hiredDelete"
     );
     localStorage.setItem(
+      "hireSendDelete2",
+      "http://localhost:3001/api/hiredDelete2"
+    );
+    localStorage.setItem(
       "getHiredNames",
       "http://localhost:3001/api/getHiredNames"
     );

@@ -83,7 +83,7 @@ class archiveNames extends Component {
                                     key={j}
                                   
                                     className=" btn btn-lg btn-block col-6"
-                                    style={{ borderRadius: 0, background: "#2F3E48" }}
+                                    style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
                                     onClick={() => {
                                       this.Redirect(name.name);
                                     }}

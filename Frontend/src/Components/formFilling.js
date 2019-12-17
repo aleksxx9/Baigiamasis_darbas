@@ -15,6 +15,7 @@ export default class formFilling extends Component {
     this.state = {
       name: "",
       data: [],
+      credentials: "",
     };
   }
 
@@ -91,7 +92,7 @@ export default class formFilling extends Component {
                   elem.value +
                   this.state.data[key].name +
                   " value='" +
-                  elem.value +
+                  elem.label +
                   "' name='" +
                   this.state.data[key].label +
                   "'";
@@ -135,15 +136,14 @@ export default class formFilling extends Component {
               this.state.data[key].values.map((elem, i) => {
                 data =
                   data +
-                  "<input type='radio' name=" +
+                  "<input type='radio' name=\"" +
                   this.state.data[key].label +
-                  this.state.data[key].name +
-                  " id=" +
+                  "\" id=" +
                   i +
                   elem.value +
                   this.state.data[key].name +
-                  " value=" +
-                  elem.value +
+                  " value='" +
+                  elem.label +
                   "' ";
                 if (elem.selected) {
                   data = data + " checked ";
@@ -227,10 +227,22 @@ export default class formFilling extends Component {
         </form>
         <br />
         <div className=" d-flex justify-content-center">
+        <div style={{ color: "red" }}>{this.state.credentials}</div>
+        </div>
+        <br />
+        <div className=" d-flex justify-content-center">
+        
           <Button
             id="submit"
             onClick={async () => {
               const formData = $("#FormFill").serializeArray();
+              let pass = true;
+              for (let i=0; i < formData.length; i++ )
+              {
+                if ( formData[i].value == "") pass = false;
+              }
+              if (pass){
+                this.setState({credentials: ""})
               try {
                 const response = await fetch(localStorage.getItem("AnswerForm"), {
                   headers: { "Content-Type": "application/json" },
@@ -242,10 +254,11 @@ export default class formFilling extends Component {
                   }),
                 });
                 alert("Thanks for filling the form!");
-                window.location.reload();
+               window.location.reload();
               } catch (e) {
                 alert(e);
-              }
+              }}
+              else {this.setState({credentials: "Please fill all the fields"})}
             }}
             className="btn btn-success"
             style={{ borderRadius: "0" }}

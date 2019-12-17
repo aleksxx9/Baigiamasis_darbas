@@ -57,7 +57,7 @@ class Statistics extends Component {
         else archiveData.push([el.name, 0]);
       });
       this.setState({ archiveData: archiveData });
-
+      this.Filled();
     } catch (e) {
       this.setState({ error: e });
     }
@@ -99,34 +99,30 @@ class Statistics extends Component {
         else archiveData.push([el.name, 0]);
       });
       this.setState({ filledData: archiveData });
-
+      this.Joined();
     } catch (e) {
       this.setState({ error: e });
     }
   }
 
-  Joined()
+  async Joined()
   {
     let joined = [["name", "count"]];
     if(this.state.filledData)
     this.state.filledData.map((el,i) => {
       if ( i != 0)  joined.push([el[0], el[1] + this.state.archiveData[i][1]]);
     })
-    this.setState({joined: joined});
+    await this.setState({joined: joined});
   }
 
   componentDidMount() {
     this.Archive();
-    this.Filled();
   }
 
 
   render() {
     let archive = this.state.archiveData
     let filled = this.state.filledData
-    if (this.state.filledData && !this.state.joined) {
-      this.Joined();
-    }
     let joined = this.state.joined
     return (
       <div>

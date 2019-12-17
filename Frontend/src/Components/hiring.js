@@ -73,7 +73,7 @@ class Hiring extends Component {
                       return (
                         <div key={j}>
                           {
-                             ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1) 
+                             ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1 ) 
                              ? ( <div> 
                                {
                                  localStorage.getItem("userRole") == "Super Admin" ? (admin=0,<div></div>) : (<div></div>)}
@@ -85,7 +85,7 @@ class Hiring extends Component {
                                   <Button
                                     key={j}
                                     className=" btn btn-lg btn-block col-6"
-                                    style={{ borderRadius: 0, background: "#2F3E48" }}
+                                    style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
                                     onClick={() => {
                                       this.Redirect(name.name);
                                     }}

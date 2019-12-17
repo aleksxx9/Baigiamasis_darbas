@@ -25,6 +25,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/hiring")}
               >
@@ -39,6 +40,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/archiveNames")}
               >
@@ -53,6 +55,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/formShare")}
               >
@@ -67,6 +70,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/Prolong")}
               >
@@ -81,6 +85,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/Statistics")}
               >
@@ -95,6 +100,7 @@ export default class mainPage extends React.Component {
                   width: "100%",
                   marginBottom: "10%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/delete")}
               >
@@ -108,6 +114,7 @@ export default class mainPage extends React.Component {
                   padding: "5%",
                   width: "100%",
                   fontWeight: "bold",
+                  backgroundColor: "rgb(52, 58, 64)"
                 }}
                 onClick={() => this.props.history.push("/formCreate")}
               >

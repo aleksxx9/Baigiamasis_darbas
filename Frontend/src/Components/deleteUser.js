@@ -41,7 +41,6 @@ async handleSubmit(event) {
       });
       this.setState({ credentials: "" });
       let data = await response.text();
-      console.log(data);
     } catch (e) {
       console.log(e.message);
     }
@@ -69,7 +68,7 @@ async handleSubmit(event) {
         this.setState({
           error: "Sorry, currently there are no available positions!",
         });
-      this.setState({ result: data[0].email, data: data});
+     this.setState({ result: data[0].email, data: data});
     } catch (e) {
       this.setState({ error: e });
     }
@@ -104,10 +103,10 @@ async handleSubmit(event) {
                     {
                       this.state.data ? (
                         this.state.data.map((name, i) => {
-                          return (
-                            <option key={i}>
+                           return (
+                            name ? (<option key={i}>
                               {name.email}
-                            </option>
+                            </option>) : (<option hidden></option>)
                           );
                         })) : (<option hidden></option>)
                     }

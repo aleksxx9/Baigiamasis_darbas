@@ -11,6 +11,9 @@ const formSchema = new mongoose.Schema({
   author: {
     type: JSON,
     required: true,
+  },
+  status: {
+    type: String,
   }
 });
 

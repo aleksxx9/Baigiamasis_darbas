@@ -67,7 +67,7 @@ class Registration extends Component {
       //this.setState({ credentials: "" });
       const data = await response.text();
       if (data == "Success" || data == "{}") {
-        this.setState({ credentialsSuccess: data });
+        this.setState({ credentialsSuccess: "Success"});
         this.setState({ credentials: "" });
         window.location.reload();
       } else {
@@ -203,7 +203,7 @@ class Registration extends Component {
                     opacity: ".65",
                   }}
                 >
-                  Login
+                  Register new user
                 </Button>
                 <div style={{ color: "red" }}>{this.state.credentials}</div>
                 <div style={{ color: "green" }}>

@@ -6,6 +6,7 @@ router.post("/", async (req, res) => {
     name: req.body.name,
     data: req.body.data,
     author: req.body.author,
+    status: "",
   });
   try {
     await form.save();
