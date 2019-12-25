@@ -25,9 +25,6 @@ class Login extends Component {
       const response = await fetch(localStorage.getItem("getFormNames"), {
         headers: { "Content-Type": "application/json" },
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       const data = await response.json();
       if (!data[0])
@@ -52,54 +49,53 @@ class Login extends Component {
     return (
       <div>
         {//while there's no data dispalys loader
-        this.state.loading || !this.state.data ? (
-          <div
-            className="w-100 d-flex justify-content-center"
-            style={{
-              margin: "0",
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-            }}
-          >
+          this.state.loading || !this.state.data ? (
             <div
-              className="spinner-border text-primary"
-              role="status"
-              style={{ display: this.state.display }}
+              className="w-100 d-flex justify-content-center"
+              style={{
+                margin: "0",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
             >
-              <span className="sr-only">Loading...</span>
+              <div
+                className="spinner-border text-primary"
+                role="status"
+                style={{ display: this.state.display }}
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div style={{ marginTop: "15px" }}>
-            {this.state.data.map((name, i) => {
-              let date = new Date();
-              let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-              if((name.role == "Everyone" || name.role == "Colleagues") && (Date.parse(name.expirationTime) >= Date.parse(dateFormat) || name.expirationTime == ""))
-              return (
-                <div
-                  key={i}
-                  className="col-12 d-flex justify-content-center"
-                  style={{ marginTop: "10px" }}
-                >
-                  <Button
-                    key={i}
-                    className=" btn btn-lg btn-block col-6"
-                    style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
-                    onClick={() => {
-                      this.Redirect(name.name);
-                    }}
-                  >
-                    {name.name}
-                  </Button>
+          ) : (
+              <div style={{ marginTop: "15px" }}>
+                {this.state.data.map((name, i) => {
+                  let date = new Date();
+                  let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+                  if ((name.role == "Everyone" || name.role == "Colleagues") && (Date.parse(name.expirationTime) >= Date.parse(dateFormat) || name.expirationTime == ""))
+                    return (
+                      <div
+                        key={i}
+                        style={{ marginTop: "10px", display: "block", float: "left", width: "145px", marginLeft: "15px" }}
+                      >
+                        <Button
+                          key={i}
+                          className=" btn btn-lg btn-block col-12"
+                          style={{ textAlign: "center", borderRadius: 0, overflow: "hidden", backgroundColor: "rgb(52, 58, 64)", height: "120px" }}
+                          onClick={() => {
+                            this.Redirect(name.name);
+                          }}
+                        >
+                          <p style={{ textAlign: "center", width: "100%", fontSize: "15px", overflow: "hidden" }}>{name.name}</p>
+                        </Button>
+                      </div>
+                    );
+                })}
+                <div className="text-danger d-flex justify-content-center">
+                  {this.state.error}
                 </div>
-              );
-            })}
-            <div className="text-danger d-flex justify-content-center">
-              {this.state.error}
-            </div>
-          </div>
-        )}
+              </div>
+            )}
       </div>
     );
   }

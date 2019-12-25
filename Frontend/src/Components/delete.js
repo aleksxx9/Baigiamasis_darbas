@@ -15,9 +15,6 @@ class Delete extends Component {
       const response = await fetch(localStorage.getItem("getFormNames"), {
         headers: { "Content-Type": "application/json" },
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       const data = await response.json();
 
@@ -88,29 +85,27 @@ class Delete extends Component {
                           return (
                             <div key={j}>
                               {
-                                 ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1) 
-                                 ? ( <div> 
-                                   {
-                                     localStorage.getItem("userRole") == "Super Admin" ? (admin=0,<div></div>) : (<div></div>)}
-                                   <div
-                                     key={j}
-                                     className="col-12 d-flex justify-content-center"
-                                     style={{ marginTop: "10px" }}
-                                   >
-                                     <Button
-                                       key={j}
-                                     
-                                       className=" btn btn-lg btn-block col-6"
-                                       style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
-                                       onClick={() => {
-                                         this.Redirect(name.name);
-                                       }}
-                                     >
-                                       {name.name}
-                                     </Button>
-                                     </div>
-                                   </div>
-                                 ) : (<div key={j}> </div>)
+                                ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1)
+                                  ? (<div>
+                                    {
+                                      localStorage.getItem("userRole") == "Super Admin" ? (admin = 0, <div></div>) : (<div></div>)}
+                                    <div
+                                      key={i}
+                                      style={{ marginTop: "10px", display: "block", float: "left", width: "10%", marginLeft: "15px" }}
+                                    >
+                                      <Button
+                                        key={i}
+                                        className=" btn btn-lg btn-block col-12"
+                                        style={{ textAlign: "center", borderRadius: 0, overflow: "hidden", backgroundColor: "rgb(52, 58, 64)", height: "120px" }}
+                                        onClick={() => {
+                                          this.Redirect(name.name);
+                                        }}
+                                      >
+                                        <p style={{ textAlign: "center", width: "100%", fontSize: "15px", overflow: "hidden" }}>{name.name}</p>
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  ) : (<div key={j}> </div>)
                               }
                             </div>
                           );

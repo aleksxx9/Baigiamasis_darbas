@@ -25,9 +25,6 @@ class Login extends Component {
       const response = await fetch(localStorage.getItem("getFormNames"), {
         headers: { "Content-Type": "application/json" },
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       const data = await response.json();
       if (!data[0])
@@ -59,6 +56,7 @@ class Login extends Component {
     this.props.history.push("/formFilling");
   }
   render() {
+    let j=0;
     return (
       <div>
         {//while there's no data dispalys loader
@@ -81,27 +79,25 @@ class Login extends Component {
             </div>
           </div>
         ) : (
-          <div style={{ marginTop: "15px" }}>
+          <div style={{ marginTop: "15px", display: "", justifyContent: "center", width: "100%"}}>
             {this.state.data.map((name, i) => {
-              //let name1 = name.split('\\n');
               let date = new Date();
               let dateFormat = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
               if((name.role == "Everyone" || name.role == "Regular users") && (Date.parse(name.expirationTime) >= Date.parse(dateFormat) || name.expirationTime == ""))
               return (
                 <div
                   key={i}
-                  className="col-12 d-flex justify-content-center"
-                  style={{ marginTop: "10px" }}
+                  style={{ marginTop: "10px", display: "block", float:"left", width:"145px", marginLeft: "15px"}}
                 >
                   <Button
                     key={i}
-                    className=" btn btn-lg btn-block col-6"
-                    style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
+                    className=" btn btn-lg btn-block col-12"
+                    style={{ textAlign:"center", borderRadius: 0, overflow: "hidden", backgroundColor: "rgb(52, 58, 64)", height:"120px"}}
                     onClick={() => {
                       this.Redirect(name.name);
                     }}
                   >
-                    {name.name}
+                    <p style={{ textAlign:"center", width:"100%", fontSize: "15px", overflow:"hidden"}}>{name.name}</p>
                   </Button>
                 </div>
               );

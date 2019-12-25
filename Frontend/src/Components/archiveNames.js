@@ -41,69 +41,67 @@ class archiveNames extends Component {
     return (
       <div>
         {//while there's no data dispalys loader
-        this.state.loading || !this.state.data ? (
-          <div
-            className="w-100 d-flex justify-content-center"
-            style={{
-              margin: "0",
-              position: "absolute",
-              top: "50%",
-              transform: "translateY(-50%)",
-            }}
-          >
+          this.state.loading || !this.state.data ? (
             <div
-              className="spinner-border text-primary"
-              role="status"
-              style={{ display: this.state.display }}
+              className="w-100 d-flex justify-content-center"
+              style={{
+                margin: "0",
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
             >
-              <span className="sr-only">Loading...</span>
+              <div
+                className="spinner-border text-primary"
+                role="status"
+                style={{ display: this.state.display }}
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div style={{ marginTop: "15px" }}>
-            {this.state.data.map((name, i) => {
-              admin=1;
-              return (
-                <div key={i}>
-                  {
-                    name.author.map((auth, j) => {
-                      return (
-                        <div key={j}>
-                          {
-                            ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1) 
-                              ? ( <div> 
-                                {
-                                  localStorage.getItem("userRole") == "Super Admin" ? (admin=0,<div></div>) : (<div></div>)}
-                                <div
-                                  key={j}
-                                  className="col-12 d-flex justify-content-center"
-                                  style={{ marginTop: "10px" }}
-                                >
-                                  <Button
-                                    key={j}
-                                  
-                                    className=" btn btn-lg btn-block col-6"
-                                    style={{ borderRadius: 0, backgroundColor: "rgb(52, 58, 64)" }}
-                                    onClick={() => {
-                                      this.Redirect(name.name);
-                                    }}
-                                  >
-                                    {name.name}
-                                  </Button>
+          ) : (
+              <div style={{ marginTop: "15px" }}>
+                {this.state.data.map((name, i) => {
+                  admin = 1;
+                  return (
+                    <div key={i}>
+                      {
+                        name.author.map((auth, j) => {
+                          return (
+                            <div key={j}>
+                              {
+                                ((auth.name == localStorage.getItem("userDisplay") || localStorage.getItem("userRole") == "Super Admin") && admin == 1)
+                                  ? (<div style={{ alignContent: "center" }}>
+                                    {
+                                      localStorage.getItem("userRole") == "Super Admin" ? (admin = 0, <div></div>) : (<div></div>)}
+                                    <div
+                                      key={i}
+                                      style={{ marginTop: "10px", display: "block", float: "left", width: "145px", marginLeft: "15px" }}
+                                    >
+                                      <Button
+                                        key={i}
+                                        className=" btn btn-lg btn-block col-12"
+                                        style={{ textAlign: "center", borderRadius: 0, overflow: "hidden", backgroundColor: "rgb(52, 58, 64)", height: "120px" }}
+                                        onClick={() => {
+                                          this.Redirect(name.name);
+                                        }}
+                                      >
+                                        <p style={{ textAlign: "center", width: "100%", fontSize: "15px", overflow: "hidden" }}>{name.name}</p>
+                                      </Button>
+                                    </div>
                                   </div>
-                                </div>
-                              ) : (<div key={j}> </div>)
-                          }
-                        </div>
-                      );
-                    }
-                    )
-                  }
-                </div>
-              );
-            })}
-          </div>
-        )}
+                                  ) : (<div key={j}> </div>)
+                              }
+                            </div>
+                          );
+                        }
+                        )
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+            )}
         <div className="d-flex justify-content-center text-danger">
           {this.state.error}
         </div>

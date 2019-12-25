@@ -42,7 +42,7 @@ export default class hiringAccept extends Component {
       const s = document.createElement("script");
       s.type = "text/javascript";
       s.async = true;
-      ; s.innerHTML =
+      s.innerHTML =
         'function sendData(id) {let data = document.getElementById(id); sendData1(data)  }  async function sendData1(hired) {var id = hired.id;' +
         'const name1 = $(document.getElementById("Name")).prop("innerHTML");' +
         'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = newMessage.replace(/<\\/?("[^"]*"|\'[^\']*\'|[^>])*(>|$)/g, " ");' +
@@ -105,7 +105,6 @@ export default class hiringAccept extends Component {
                   document.getElementById("form").innerHTML = data + "</div>";
                 }
               }
-              
             })}
           </div>
         ) : (

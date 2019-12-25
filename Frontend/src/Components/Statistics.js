@@ -21,8 +21,7 @@ class Statistics extends Component {
     };
   }
 
-  async Archive()
-  {
+  async Archive() {
     try {
       const response = await fetch(localStorage.getItem("popularHired"), {
         headers: { "Content-Type": "application/json" },
@@ -49,22 +48,40 @@ class Statistics extends Component {
         },
       });
       const data3 = await response3.json();
-      let archiveData = [["name", "count"]];
+      let archiveData = [];
+      let archiveData1 = [];
       data3.map(el => {
         if (data1[el.name]) {
+          archiveData1.push([el.name, data1[el.name]]);
           archiveData.push([el.name, data1[el.name]]);
         }
-        else archiveData.push([el.name, 0]);
+        else {
+          archiveData.push([el.name, 0]);
+          archiveData1.push([el.name, 0]);
+        }
       });
-      this.setState({ archiveData: archiveData });
+      this.setState({ archiveDataAll: archiveData1 })
+      archiveData.sort(this.sortByProperty("1"));
+      archiveData.unshift(["name", "count "]);
+
+      const newArr = [];
+      archiveData.map((name, i) => {
+        if (i <= 5)
+          newArr[i] = name;
+      })
+      this.setState({ archiveData: newArr });
       this.Filled();
     } catch (e) {
       this.setState({ error: e });
     }
   }
+  sortByProperty = function (property) {
+    return function (x, y) {
+      return (x[property] === y[property]) ? 0 : ((x[property] < y[property]) ? 1 : -1);
+    };
+  };
 
-  async Filled()
-  {
+  async Filled() {
     try {
       const response = await fetch(localStorage.getItem("popularAnswer"), {
         headers: { "Content-Type": "application/json" },
@@ -86,33 +103,49 @@ class Statistics extends Component {
       const response3 = await fetch(localStorage.getItem("getFormNames"), {
         headers: { "Content-Type": "application/json" },
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       const data3 = await response3.json();
-      let archiveData = [["name", "count"]];
+      let archiveData = [];
+      let archiveData1 = [];
       data3.map(el => {
         if (data1[el.name]) {
           archiveData.push([el.name, data1[el.name]]);
+          archiveData1.push([el.name, data1[el.name]]);
         }
-        else archiveData.push([el.name, 0]);
+        else {
+          archiveData.push([el.name, 0]);
+          archiveData1.push([el.name, 0]);
+        }
       });
-      this.setState({ filledData: archiveData });
+      this.setState({ filledDataAll: archiveData1 })
+      archiveData.sort(this.sortByProperty("1"));
+      archiveData.unshift(["name", "count"]);
+      const newArr = [];
+      archiveData.map((name, i) => {
+        if (i <= 5)
+          newArr[i] = name;
+      })
+      this.setState({ filledData: newArr });
       this.Joined();
     } catch (e) {
       this.setState({ error: e });
     }
   }
 
-  async Joined()
-  {
+  async Joined() {
     let joined = [["name", "count"]];
-    if(this.state.filledData)
-    this.state.filledData.map((el,i) => {
-      if ( i != 0)  joined.push([el[0], el[1] + this.state.archiveData[i][1]]);
+    if (this.state.filledDataAll)
+      this.state.filledDataAll.map((el, i) => {
+        if (i != 0) joined.push([el[0], el[1] + this.state.archiveDataAll[i][1]]);
+      })
+    joined.sort(this.sortByProperty("1"));
+    joined.unshift(["name", "count"]);
+    const newArr = [];
+    joined.map((name, i) => {
+      if (i <= 5)
+        newArr[i] = name;
     })
-    await this.setState({joined: joined});
+    await this.setState({ joined: newArr });
   }
 
   componentDidMount() {
@@ -143,7 +176,7 @@ class Statistics extends Component {
             }}
           />
         </div>
-         <div className="d-flex justify-content-center" style={{
+        <div className="d-flex justify-content-center" style={{
           marginTop: "12px",
         }}>
           <Chart className="col-12"

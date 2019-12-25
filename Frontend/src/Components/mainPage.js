@@ -29,7 +29,7 @@ export default class mainPage extends React.Component {
                 }}
                 onClick={() => this.props.history.push("/hiring")}
               >
-                Start hiring!
+                Start hiring
               </Button>
             </span>
             <span className="d-block">

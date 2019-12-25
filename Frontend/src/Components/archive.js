@@ -70,23 +70,31 @@ export default class Arcihve extends Component {
 
   render() {
     let data = "";
+    let data2 = "";
     return (
       <div>
         {this.state.data ? (
           <div>
             {this.state.data.map(elem => {
+              elem.data = elem.data.slice(2, elem.data.length - 1);
+              elem.data = "<b>" + elem.data ;
+              elem.data = elem.data.replace(/(  [^  ]*  )/g, '$1<br>|');
+              elem.data = elem.data.replace(/[\:]/g, ':</b>');
+              elem.data = elem.data.replace(/\<br\>\|/g, '<br><b>');
+              elem.data = elem.data.slice(elem.data, -3);
               data =
                 data +
-                "<div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default'></div><div class='panel d-flex justify-content-center'>" +
-                elem.data.slice(1, elem.data.length - 1) +
+                "<div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default'></div><div class='panel '>" +
+                elem.data +
                 "</div></br>";
-                data = data.replace(/(  )/g, '<br>');
-              document.getElementById("form").innerHTML = data + "</div>";
+              data2 += data;
+              document.getElementById("form").innerHTML = data2 + "</div>";
+              data="";
             })}
           </div>
         ) : (
-          <div />
-        )}
+            <div />
+          )}
         <br />
         <div className=" d-flex  justify-content-center">
           <h1 id="Name">{this.state.name}</h1>

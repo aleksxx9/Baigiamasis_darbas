@@ -85,13 +85,13 @@ class Nav extends React.Component {
                   <FaHome size="25px" />
                 </Button>
               </div>
-              <div className="col-5 col-sm-3 col-md-7 col-lg-7 col-xl-7 d-inline-block ">
+              <div className="col-3 col-sm-3 col-md-7 col-lg-7 col-xl-7 d-inline-block ">
                 <NavbarBrand
                   className="navbar-brand"
                   style={{ fontSize: "1em", fontWeight: "bold" }}
                 ></NavbarBrand>
               </div>
-              <div className="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right">
+              <div className="col-7 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right">
               {localStorage.getItem("userRole") == "Super Admin" ? (
               <Button
                   id="Popover1"
@@ -106,7 +106,6 @@ class Nav extends React.Component {
               ) : (<div></div>)
               }
                 <Button
-                  id="Popover1"
                   style={{
                     backgroundColor: "transparent",
                     border: "none",

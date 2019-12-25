@@ -63,11 +63,9 @@ export default class formFilling extends Component {
                 "'class='" +
                 this.state.data[key].className +
                 "'maxlength='" +
-                this.state.data[key].maxlength +
-                "'";
-              if (this.state.data[key].required == true) {
-                data = data + "'required ";
-              }
+                this.state.data[key].maxlength ;
+                data = data + "\" required '";
+              
               data = data + "subtype='" + this.state.data[key].subtype + "' ";
               if (this.state.data[key].placeholder)
                 data =

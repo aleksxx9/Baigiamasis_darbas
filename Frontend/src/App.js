@@ -37,7 +37,6 @@ const refreshToken = async () => {
       },
       method: "GET",
     });
-    //this.setState({ credentials: "" });
     const data = await response.text();
     localStorage.setItem("jwt", data);
   } catch (e) {}
