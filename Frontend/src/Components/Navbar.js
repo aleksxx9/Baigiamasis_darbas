@@ -9,11 +9,6 @@ import { MdDelete } from "react-icons/md";
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.popOver = this.popOver.bind(this);
-    this.popOver1 = this.popOver1.bind(this);
-    this.popOver2 = this.popOver2.bind(this);
-    this.popOver3 = this.popOver3.bind(this);
-    this.popOver4 = this.popOver4.bind(this);
     this.removeJWT = this.removeJWT.bind(this);
     this.state = {
       popoverOpen: false,
@@ -23,43 +18,17 @@ class Nav extends React.Component {
     };
   }
 
-  popOver() {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen,
-    });
-  }
-
-  popOver1() {
-    this.setState({
-      popoverOpen1: !this.state.popoverOpen1,
-    });
-  }
-  popOver2() {
-    this.setState({
-      popoverOpen2: !this.state.popoverOpen2,
-    });
-  }
-  popOver3() {
-    this.setState({
-      popoverOpen3: !this.state.popoverOpen3,
-    });
-  }
-
-  popOver4() {
-    this.setState({
-      popoverOpen4: !this.state.popoverOpen4,
-    });
-  }
 
   removeJWT() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("userName");
     localStorage.removeItem("userRole");
+    window.location.reload();
   }
 
   componentDidMount() {
     if (localStorage.getItem("isLogged") == false) {
-      localStorage.removeItem("userRole");
+        this.removeJWT();
     }
   }
 
@@ -94,7 +63,6 @@ class Nav extends React.Component {
               <div className="col-7 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-inline-block text-right">
               {localStorage.getItem("userRole") == "Super Admin" ? (
               <Button
-                  id="Popover1"
                   style={{
                     backgroundColor: "transparent",
                     border: "none",
@@ -115,7 +83,6 @@ class Nav extends React.Component {
                   <FaUserPlus size="25px" style={{ marginRight: "5px" }} />
                 </Button>
                 <Button
-                  id="Popover"
                   className="text-right d-inline-block"
                   style={{
                     backgroundColor: "transparent",

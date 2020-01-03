@@ -39,7 +39,17 @@ const refreshToken = async () => {
     });
     const data = await response.text();
     localStorage.setItem("jwt", data);
-  } catch (e) {}
+    const url2 = localStorage.getItem("userInfo");
+    const response2 = await fetch(url2, {
+      headers: { "Content-Type": "application/json" },
+      method: "get",
+      headers: {
+        auth: localStorage.getItem("jwt"),
+      },
+    });
+    const data2 = await response2.json();
+    localStorage.setItem("expiration", data2.exp);
+  } catch (e) { }
   if (
     localStorage.getItem("jwt") == "Invalid token" ||
     localStorage.getItem("jwt") == "Access denied"
@@ -81,12 +91,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       checkAuth() ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-          }}
-        />
-      )
+          <Redirect
+            to={{
+              pathname: "/",
+            }}
+          />
+        )
     }
   />
 );
@@ -99,12 +109,12 @@ const PrivateRoute2 = ({ component: Component, ...rest }) => (
       checkAuth2() ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-          }}
-        />
-      )
+          <Redirect
+            to={{
+              pathname: "/",
+            }}
+          />
+        )
     }
   />
 );

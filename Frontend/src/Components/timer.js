@@ -17,11 +17,13 @@ export default class Timer extends Component {
         count: new Date().getTime(),
       });
       if (
-        !localStorage.getItem("userRole") &&
-        localStorage.getItem("isLogged") == "true"
+        localStorage.getItem("userRole") &&
+        localStorage.getItem("isLogged") == "true" && this.state.count >= localStorage.getItem("expiration") * 1000
       ) {
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("expiration");
         window.location.reload();
       }
-    }, 1000);
+    }, 60000);
   }
 }

@@ -138,9 +138,14 @@ export default class formCreate extends React.Component {
     let formBuilder = $(fbTemplate).formBuilder(options);
     document.getElementById("saveData").addEventListener("click", () => {
       if (document.getElementById("name").value) {
-        this.saveForm(formBuilder.actions.save());
-        formBuilder.actions.clearFields();
-        window.location.reload();
+        if (document.getElementById("name").value.indexOf('ą') == -1  && document.getElementById("name").value.indexOf('č') == -1 && document.getElementById("name").value.indexOf('ę') == -1&& document.getElementById("name").value.indexOf('ė') == -1&& document.getElementById("name").value.indexOf('į') == -1&& document.getElementById("name").value.indexOf('š') == -1&& document.getElementById("name").value.indexOf('ų') == -1&& document.getElementById("name").value.indexOf('ū') == -1&& document.getElementById("name").value.indexOf('žą') == -1 )
+        {
+          this.saveForm(formBuilder.actions.save());
+          formBuilder.actions.clearFields();
+          window.location.reload();}
+        else {
+          alert("ą č ę ė į š ų ū ž are not allowed in the name");
+        }
       } else {
         alert("Form name is required");
         this.input.focus();

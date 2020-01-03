@@ -37,35 +37,6 @@ export default class Arcihve extends Component {
 
   componentDidMount() {
     this.getForm();
-
-    const s = document.createElement("script");
-    s.type = "text/javascript";
-    s.async = true;
-
-    s.innerHTML =
-      'function sendData(id) {let data = document.getElementById(id);  sendData1(data)  }  async function sendData1(hired) {var id = hired.id;  const name1 = $(document.getElementById("Name")).prop("innerHTML");  var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = JSON.stringify(newMessage);try {const response = await fetch("' +
-      localStorage.getItem("hireSend") +
-      "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
-      "name1" +
-      ', data: newMessage,}),});  try {const response = await fetch("' +
-      localStorage.getItem("hireSendDelete") +
-      "\", {headers: {'Content-Type':'application/json', name:" +
-      "id" +
-      ",},method: 'DELETE',}); window.location.reload()} catch (e) {console.log(e);}} catch (e) {console.log(e);}}";
-
-    this.instance.appendChild(s);
-    const del = document.createElement("script");
-    del.type = "text/javascript";
-    del.async = true;
-
-    del.innerHTML =
-      'function declineData(id) {let data = document.getElementById(id);  deleteData(data)  }  async function deleteData(hired) {var id = hired.id; ;   try {const response = await fetch("' +
-      localStorage.getItem("hireSendDelete") +
-      "\", {headers: {'Content-Type':'application/json', name:" +
-      "id" +
-      ",},method: 'DELETE',});window.location.reload()} catch (e) {console.log(e);} }";
-
-    this.delete.appendChild(del);
   }
 
   render() {
@@ -77,7 +48,7 @@ export default class Arcihve extends Component {
           <div>
             {this.state.data.map(elem => {
               elem.data = elem.data.slice(2, elem.data.length - 1);
-              elem.data = "<b>" + elem.data ;
+              elem.data = "<b>" + elem.data;
               elem.data = elem.data.replace(/(  [^  ]*  )/g, '$1<br>|');
               elem.data = elem.data.replace(/[\:]/g, ':</b>');
               elem.data = elem.data.replace(/\<br\>\|/g, '<br><b>');
@@ -89,7 +60,7 @@ export default class Arcihve extends Component {
                 "</div></br>";
               data2 += data;
               document.getElementById("form").innerHTML = data2 + "</div>";
-              data="";
+              data = "";
             })}
           </div>
         ) : (
@@ -103,10 +74,6 @@ export default class Arcihve extends Component {
         <div className="col-12 d-flex justify-content-center">
           <div id="form" className=" col-6 " />
         </div>
-        <br />
-        <div ref={el => (this.instance = el)} />
-        <div ref={el => (this.delete = el)} />
-        <br />
       </div>
     );
   }

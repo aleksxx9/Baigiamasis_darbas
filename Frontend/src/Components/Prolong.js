@@ -43,13 +43,13 @@ class Prolong extends Component {
   }
 
   async changeOptions() {
-    this.state.data.map((res) => {
-      if (this.state.result == res.name) {
-        this.setState({ authors: res.author })
-      }
-    })
-    let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
-    await this.setState({ distinct: results });
+    // this.state.data.map((res) => {
+    //   if (this.state.result == res.name) {
+    //     this.setState({ authors: res.author })
+    //   }
+    // })
+    // let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
+    // await this.setState({ distinct: results });
   }
 
   handleSelectUserChange = (event) => {

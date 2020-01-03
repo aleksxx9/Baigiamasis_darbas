@@ -32,7 +32,7 @@ class DeleteUser extends Component {
     })
   }
 
-async handleSubmit(event) {
+async handleSubmit() {
     const url = localStorage.getItem("deleteUser");
     try {
     let response = await fetch(url, {

@@ -62,7 +62,7 @@ class Statistics extends Component {
       });
       this.setState({ archiveDataAll: archiveData1 })
       archiveData.sort(this.sortByProperty("1"));
-      archiveData.unshift(["name", "count "]);
+      archiveData.unshift(["name", "count"]);
 
       const newArr = [];
       archiveData.map((name, i) => {
@@ -95,7 +95,6 @@ class Statistics extends Component {
         .assign(res, {
           [item["name"]]: 1 + (res[item["name"]] || 0)
         }), Object.create(null));
-
       if (!data[0])
         this.setState({
           error: "Sorry, currently there are no available positions!",
@@ -163,15 +162,14 @@ class Statistics extends Component {
           marginTop: "12px",
         }}>
           <Chart className="col-12"
-            width={'500px'}
+            width={'600px'}
             height={'300px'}
             chartType="Bar"
             loader={<div>Loading Chart</div>}
             data={joined}
             options={{
-              // Material design options
               chart: {
-                title: 'Most popular forms',
+                title: 'TOP 5 forms',
               },
             }}
           />
@@ -180,15 +178,14 @@ class Statistics extends Component {
           marginTop: "12px",
         }}>
           <Chart className="col-12"
-            width={'500px'}
+            width={'600px'}
             height={'300px'}
             chartType="Bar"
             loader={<div>Loading Chart</div>}
             data={filled}
             options={{
-              // Material design options
               chart: {
-                title: 'Unprocessed forms',
+                title: 'TOP 5 filled forms',
               },
             }}
           />
@@ -197,15 +194,14 @@ class Statistics extends Component {
           marginTop: "12px",
         }}>
           <Chart className="col-12"
-            width={'500px'}
+            width={'600px'}
             height={'300px'}
             chartType="Bar"
             loader={<div>Loading Chart</div>}
             data={archive}
             options={{
-              // Material design options
               chart: {
-                title: 'Processed forms',
+                title: 'TOP 5 archived forms',
               },
             }}
           />

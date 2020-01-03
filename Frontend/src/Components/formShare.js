@@ -48,7 +48,7 @@ class Share extends Component {
     this.setState({
       user: event.target.value
     })
-  }
+  } 
 
 handleSubmit(event) {
     const url = localStorage.getItem("addAuth");

@@ -74,7 +74,7 @@ export default class mainPage extends React.Component {
                 }}
                 onClick={() => this.props.history.push("/Prolong")}
               >
-                Prolong or set dates to forms
+                Prolong or set date to forms
               </Button>
             </span>
             <span className="d-block">

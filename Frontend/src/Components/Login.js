@@ -64,11 +64,13 @@ class Login extends Component {
         localStorage.setItem("userDisplay", this.state.user.email);
         localStorage.setItem("userName", this.state.user.name);
         localStorage.setItem("userRole", this.state.user.role);
+        localStorage.setItem("expiration", this.state.user.exp);
         this.setState({ redirect: true });
       } else if (this.state.user != "" && this.state.user != null && this.state.user.role == "Worker") {
         localStorage.setItem("jwt", this.state.jwt);
         localStorage.setItem("userName", this.state.user.name);
         localStorage.setItem("userRole", this.state.user.role);
+        localStorage.setItem("expiration", this.state.user.exp);
         this.setState({ redirect2: true });
       }
     }

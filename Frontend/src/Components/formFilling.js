@@ -27,6 +27,7 @@ export default class formFilling extends Component {
     try {
       const response = await fetch(localStorage.getItem("getForm"), {
         headers: {
+          "Accept-language": "*",
           "Content-Type": "application/json",
           name: localStorage.getItem("getFormByName"),
         },

@@ -43,7 +43,7 @@ class Login extends Component {
   }
 
   async handleSubmit(event) {
-    if (this.state.newPassword == this.state.repeatPassword) {
+    if (this.state.newPassword == this.state.repeatPassword && this.state.newPassword.replace(/\s/g,"") != ""  && this.state.newPassword.length >= 6) {
       if (this.state.jwt.length > 150) {
         const url = localStorage.getItem("changePassword");
         try {
