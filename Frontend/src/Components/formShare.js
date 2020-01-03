@@ -50,7 +50,7 @@ class Share extends Component {
     })
   } 
 
-handleSubmit(event) {
+handleSubmit() {
     const url = localStorage.getItem("addAuth");
     try {
     fetch(url, {

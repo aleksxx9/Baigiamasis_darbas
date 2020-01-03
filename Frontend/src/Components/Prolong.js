@@ -39,17 +39,6 @@ class Prolong extends Component {
     await this.setState({
       result: event.target.value
     })
-    //this.changeOptions();
-  }
-
-  async changeOptions() {
-    // this.state.data.map((res) => {
-    //   if (this.state.result == res.name) {
-    //     this.setState({ authors: res.author })
-    //   }
-    // })
-    // let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
-    // await this.setState({ distinct: results });
   }
 
   handleSelectUserChange = (event) => {
@@ -58,7 +47,7 @@ class Prolong extends Component {
     })
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     const url = localStorage.getItem("updateDate");
     try {
       fetch(url, {
@@ -122,7 +111,7 @@ class Prolong extends Component {
                 color: "#212529",
               }}
             >
-              Share your form!
+              Prolong your form!
             </CardHeader>
             <CardBody>
               <Form onSubmit={this.handleSubmit}>

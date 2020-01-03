@@ -95,7 +95,7 @@ class Delete extends Component {
                                     >
                                       <Button
                                         key={i}
-                                        className=" btn btn-lg btn-block col-12"
+                                        className=" btn btn-lg btn-block col-12" id="button"
                                         style={{ textAlign: "center", borderRadius: 0, overflow: "hidden", backgroundColor: "rgb(52, 58, 64)", height: "120px" }}
                                         onClick={() => {
                                           this.Redirect(name.name);
