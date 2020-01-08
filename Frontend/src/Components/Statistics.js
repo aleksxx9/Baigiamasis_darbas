@@ -136,7 +136,7 @@ class Statistics extends Component {
     if (this.state.filledDataAll)
       this.state.filledDataAll.map((el, i) => {
         if (i != 0) joined.push([el[0], el[1] + this.state.archiveDataAll[i][1]]);
-      })
+      });
     joined.sort(this.sortByProperty("1"));
     joined.unshift(["name", "count"]);
     const newArr = [];

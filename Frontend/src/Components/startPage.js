@@ -31,7 +31,6 @@ class Login extends Component {
         this.setState({
           error: "Sorry, currently there are no available positions!",
         });
-        console.log(data);
       this.setState({ data: data });
     } catch (e) {
       this.setState({ error: e });

@@ -64,9 +64,9 @@ export default class formFilling extends Component {
                 "'class='" +
                 this.state.data[key].className +
                 "'maxlength='" +
-                this.state.data[key].maxlength ;
-                data = data + "\" required '";
-              
+                this.state.data[key].maxlength;
+              data = data + "\" required '";
+
               data = data + "subtype='" + this.state.data[key].subtype + "' ";
               if (this.state.data[key].placeholder)
                 data =
@@ -74,7 +74,7 @@ export default class formFilling extends Component {
                   "'placeholder='" +
                   this.state.data[key].placeholder +
                   "'";
-              data = data + "name='" + this.state.data[key].name + "'><br>";
+              data = data + "name='" + this.state.data[key].label + "'><br>";
             }
             if (this.state.data[key].type == "checkbox-group") {
               if (this.state.data[key].label)
@@ -176,7 +176,7 @@ export default class formFilling extends Component {
               data = data + ">";
 
               this.state.data[key].values.map((elem, i) => {
-                data = data + "<option value='" + elem.value + "'";
+                data = data + "<option value='" + elem.label + "'";
                 if (elem.selected) {
                   data = data + " selected";
                 }
@@ -198,7 +198,7 @@ export default class formFilling extends Component {
                   this.state.data[key].placeholder +
                   "'";
               if (this.state.data[key].value)
-                data = data + "value='" + this.state.data[key].value + "'";
+                data = data + "value='" + this.state.data[key].label + "'";
               if (this.state.data[key].maxLength)
                 data =
                   data + "' maxlegth='" + this.state.data[key].maxlength + "'";
@@ -213,8 +213,8 @@ export default class formFilling extends Component {
             document.getElementById("form").innerHTML = data;
           })
         ) : (
-          <div />
-        )}
+            <div />
+          )}
         <br />
         <div className=" d-flex justify-content-center">
           <h1>{this.state.name}</h1>
@@ -226,38 +226,38 @@ export default class formFilling extends Component {
         </form>
         <br />
         <div className=" d-flex justify-content-center">
-        <div style={{ color: "red" }}>{this.state.credentials}</div>
+          <div style={{ color: "red" }}>{this.state.credentials}</div>
         </div>
         <br />
         <div className=" d-flex justify-content-center">
-        
+
           <Button
             id="submit"
             onClick={async () => {
               const formData = $("#FormFill").serializeArray();
               let pass = true;
-              for (let i=0; i < formData.length; i++ )
-              {
-                if ( formData[i].value == "") pass = false;
+              for (let i = 0; i < formData.length; i++) {
+                if (formData[i].value == "") pass = false;
               }
-              if (pass){
-                this.setState({credentials: ""})
-              try {
-                const response = await fetch(localStorage.getItem("AnswerForm"), {
-                  headers: { "Content-Type": "application/json" },
-                  method: "POST",
-                  body: JSON.stringify({
-                    name: this.state.name,
-                    data: formData,
-                    author: this.state.authors,
-                  }),
-                });
-                alert("Thanks for filling the form!");
-               window.location.reload();
-              } catch (e) {
-                alert(e);
-              }}
-              else {this.setState({credentials: "Please fill all the fields"})}
+              if (pass) {
+                this.setState({ credentials: "" })
+                try {
+                  const response = await fetch(localStorage.getItem("AnswerForm"), {
+                    headers: { "Content-Type": "application/json" },
+                    method: "POST",
+                    body: JSON.stringify({
+                      name: this.state.name,
+                      data: formData,
+                      author: this.state.authors,
+                    }),
+                  });
+                  alert("Thanks for filling the form!");
+                  window.location.reload();
+                } catch (e) {
+                  alert(e);
+                }
+              }
+              else { this.setState({ credentials: "Please fill all the fields" }) }
             }}
             className="btn btn-success"
             style={{ borderRadius: "0" }}
