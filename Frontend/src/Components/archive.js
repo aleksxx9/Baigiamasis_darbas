@@ -52,7 +52,7 @@ export default class Arcihve extends Component {
               elem.data = elem.data.replace(/(  [^  ]*  )/g, '$1<br>|');
               elem.data = elem.data.replace(/[\:]/g, ':</b>');
               elem.data = elem.data.replace(/\<br\>\|/g, '<br><b>');
-              elem.data = elem.data.slice(elem.data, -3);
+              //elem.data = elem.data.slice(elem.data, -3);
               data =
                 data +
                 "<div class='accordion' style='background-color:rgb(52, 58, 64); cursor:default'></div><div class='panel '>" +
