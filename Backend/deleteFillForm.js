@@ -16,11 +16,9 @@ router.delete("/", async (req, res) => {
         var result = await Hired.deleteMany({
           name: req.header("name"),
         }).exec();
-        res.send(result);
       } catch (error) {
         res.status(500).send(error);
       }
-      res.send(result);
     } catch (error) {
       res.status(500).send(error);
     }

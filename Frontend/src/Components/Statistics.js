@@ -69,6 +69,7 @@ class Statistics extends Component {
         if (i <= 5)
           newArr[i] = name;
       })
+     
       this.setState({ archiveData: newArr });
       this.Filled();
     } catch (e) {
@@ -132,10 +133,10 @@ class Statistics extends Component {
   }
 
   async Joined() {
-    let joined = [["name", "count"]];
+    let joined = [];
     if (this.state.filledDataAll)
       this.state.filledDataAll.map((el, i) => {
-        if (i != 0) joined.push([el[0], el[1] + this.state.archiveDataAll[i][1]]);
+        if (this.state.archiveDataAll[i][1] != "count") joined.push([el[0], el[1] + this.state.archiveDataAll[i][1]]);
       });
     joined.sort(this.sortByProperty("1"));
     joined.unshift(["name", "count"]);

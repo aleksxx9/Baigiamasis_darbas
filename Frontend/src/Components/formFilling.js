@@ -74,7 +74,7 @@ export default class formFilling extends Component {
                   "'placeholder='" +
                   this.state.data[key].placeholder +
                   "'";
-              data = data + "name='" + this.state.data[key].labelcd    + "'><br>";
+              data = data + "name='" + this.state.data[key].label    + "'><br>";
             }
             if (this.state.data[key].type == "checkbox-group") {
               if (this.state.data[key].label)

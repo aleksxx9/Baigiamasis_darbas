@@ -1,6 +1,6 @@
 import $ from "jquery";
-import React, { Component, createRef } from "react";
-import { Button, Input } from "reactstrap";
+import React, { createRef } from "react";
+import { Button, Input, Label } from "reactstrap";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -138,11 +138,11 @@ export default class formCreate extends React.Component {
     let formBuilder = $(fbTemplate).formBuilder(options);
     document.getElementById("saveData").addEventListener("click", () => {
       if (document.getElementById("name").value) {
-        if (document.getElementById("name").value.indexOf('ą') == -1  && document.getElementById("name").value.indexOf('č') == -1 && document.getElementById("name").value.indexOf('ę') == -1&& document.getElementById("name").value.indexOf('ė') == -1&& document.getElementById("name").value.indexOf('į') == -1&& document.getElementById("name").value.indexOf('š') == -1&& document.getElementById("name").value.indexOf('ų') == -1&& document.getElementById("name").value.indexOf('ū') == -1&& document.getElementById("name").value.indexOf('žą') == -1 )
-        {
+        if (document.getElementById("name").value.indexOf('ą') == -1 && document.getElementById("name").value.indexOf('č') == -1 && document.getElementById("name").value.indexOf('ę') == -1 && document.getElementById("name").value.indexOf('ė') == -1 && document.getElementById("name").value.indexOf('į') == -1 && document.getElementById("name").value.indexOf('š') == -1 && document.getElementById("name").value.indexOf('ų') == -1 && document.getElementById("name").value.indexOf('ū') == -1 && document.getElementById("name").value.indexOf('žą') == -1) {
           this.saveForm(formBuilder.actions.save());
           formBuilder.actions.clearFields();
-          window.location.reload();}
+          window.location.reload();
+        }
         else {
           alert("ą č ę ė į š ų ū ž are not allowed in the name");
         }
@@ -177,7 +177,7 @@ export default class formCreate extends React.Component {
           className="d-flex justify-content-center"
         >
           <br />
-          <Input type="select" name="select" className="input-group form-control col-2 "  style={{marginRight:"50px"}} onChange={this.handleSelect}>
+          <Input type="select" name="select" className="input-group form-control col-2 " style={{ marginRight: "50px" }} onChange={this.handleSelect}>
             <option value="Everyone">Everyone</option>
             <option value="Regular users">Regular users</option>
             <option value="Colleagues">Colleagues</option>
@@ -193,11 +193,11 @@ export default class formCreate extends React.Component {
             dateFormat="yyyy/MM/dd"
           />
           <Button className="btn btn-light" style={{ backgroundColor: "white", border: "1px solid #ced4da" }} onClick={() => {
-            this.setState({startDate: ""});
+            this.setState({ startDate: "" });
           }}> Disable date</Button>
         </div>
         <div id="build-wrap"></div>
-
+        <Label style={{ fontSize: "12px", float: "right", marginRight: "25px" }}>Note: first two fields will be displayed as first name and surname</Label>
         <div
           className="saveDataWrap d-flex justify-content-center"
           style={{ marginTop: "15px" }}

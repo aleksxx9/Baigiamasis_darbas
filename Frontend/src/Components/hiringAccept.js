@@ -45,7 +45,7 @@ export default class hiringAccept extends Component {
       s.innerHTML =
         'function sendData(id) {let data = document.getElementById(id); sendData1(data)  }  async function sendData1(hired) {var id = hired.id;' +
         'const name1 = $(document.getElementById("Name")).prop("innerHTML");' +
-        'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'"); newMessage = newMessage.replace(/<\\/?("[^"]*"|\'[^\']*\'|[^>])*(>|$)/g, " ");' +
+        'var str = $(hired).prop("outerHTML"); let newMessage = str.replace(/"/g, "\'");' +
         'try {const response = await fetch("' +
         localStorage.getItem("hireSend") +
         "\", {headers: { 'Content-Type': 'application/json' },method: 'POST', body: JSON.stringify({name: " +
@@ -92,7 +92,10 @@ export default class hiringAccept extends Component {
                     "'>";
     
                   newElem.map(e => {
+                    e.value = e.value.replace(/</g, "&lt");
+                    e.value = e.value.replace(/>/g, "&gt");
                     data = data + "<b>" + e.name + ":</b> " + e.value + "<br />";
+                    data=data.replace(/::/g, ":");
                   });
                   data =
                     data +
@@ -119,8 +122,8 @@ export default class hiringAccept extends Component {
           <div id="form" className=" col-6 " />
         </div>
         <br />
-        <div ref={el => (this.instance = el)} />;
-        <div ref={el => (this.delete = el)} />;
+        <div ref={el => (this.instance = el)} />
+        <div ref={el => (this.delete = el)} />
         <br />
       </div>
     );
