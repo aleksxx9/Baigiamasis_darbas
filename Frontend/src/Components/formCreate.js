@@ -199,7 +199,7 @@ export default class formCreate extends React.Component {
         <div id="build-wrap"></div>
         <Label style={{ fontSize: "12px", float: "right", marginRight: "25px" }}>Note: first two fields will be displayed as first name and surname</Label>
         <div
-          className="saveDataWrap d-flex justify-content-center"
+          className="saveDataWrap d-flex justify-content-center w-100 "
           style={{ marginTop: "15px" }}
         >
           <div className="addFieldWrap">

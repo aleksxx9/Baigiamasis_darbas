@@ -32,10 +32,10 @@ class DeleteUser extends Component {
     })
   }
 
-async handleSubmit() {
+  async handleSubmit() {
     const url = localStorage.getItem("deleteUser");
     try {
-    let response = await fetch(url, {
+      let response = await fetch(url, {
         headers: { "Content-Type": "application/json", name: this.state.result, },
         method: "DELETE",
       });
@@ -44,12 +44,12 @@ async handleSubmit() {
     } catch (e) {
       console.log(e.message);
     }
-   window.location.reload();
+    window.location.reload();
   }
 
   //API call to backend to check credentials
   async toggle() {
-   this.handleSubmit();
+    this.handleSubmit();
   }
 
 
@@ -60,7 +60,7 @@ async handleSubmit() {
   async getFormNames() {
     try {
       const response = await fetch(localStorage.getItem("getDeleteNames"), {
-        headers: { "Content-Type": "application/json", name:  localStorage.getItem("userDisplay") },
+        headers: { "Content-Type": "application/json", name: localStorage.getItem("userDisplay") },
         method: "GET",
       });
       const data = await response.json();
@@ -68,7 +68,7 @@ async handleSubmit() {
         this.setState({
           error: "Sorry, currently there are no available positions!",
         });
-     this.setState({ result: data[0].email, data: data});
+      this.setState({ result: data[0].email, data: data });
     } catch (e) {
       this.setState({ error: e });
     }
@@ -103,10 +103,10 @@ async handleSubmit() {
                     {
                       this.state.data ? (
                         this.state.data.map((name, i) => {
-                           return (
+                          return (
                             name ? (<option key={i}>
                               {name.email}
-                            </option>) : (<option hidden></option>)
+                            </option>) : (<option key={i} hidden></option>)
                           );
                         })) : (<option hidden></option>)
                     }

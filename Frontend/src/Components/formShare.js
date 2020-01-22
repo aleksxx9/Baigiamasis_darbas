@@ -33,27 +33,26 @@ class Share extends Component {
     this.changeOptions();
   }
 
-  async changeOptions()
-  {
-      this.state.data.map((res) => {
-        if (this.state.result == res.name) {
-          this.setState({ authors: res.author })
-        }
-      })
-      let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
-      await this.setState({ distinct: results});
+  async changeOptions() {
+    this.state.data.map((res) => {
+      if (this.state.result == res.name) {
+        this.setState({ authors: res.author })
+      }
+    })
+    let results = this.state.username.filter(({ email: id1 }) => !this.state.authors.some(({ name: id2 }) => id2 === id1));
+    await this.setState({ distinct: results });
   }
 
   handleSelectUserChange = (event) => {
     this.setState({
       user: event.target.value
     })
-  } 
+  }
 
-handleSubmit() {
+  handleSubmit() {
     const url = localStorage.getItem("addAuth");
     try {
-    fetch(url, {
+      fetch(url, {
         headers: { "Content-Type": "application/json" },
         method: "PUT",
         body: JSON.stringify({
@@ -62,7 +61,7 @@ handleSubmit() {
         })
       });
       this.setState({ credentials: "" });
- 
+
     } catch (e) {
       console.log(e)
     }
@@ -72,9 +71,8 @@ handleSubmit() {
   //API call to backend to check credentials
   async toggle() {
     if (this.state.user == "") {
-      if (this.state.distinct)
-      {
-        await this.setState({user: this.state.distinct[0].email})
+      if (this.state.distinct) {
+        await this.setState({ user: this.state.distinct[0].email })
         this.handleSubmit();
       }
     }
@@ -109,7 +107,7 @@ handleSubmit() {
       this.setState({ result: data[0].name, data: data, username: data2 });
       this.state.data.map(async (res) => {
         if (data2[0].name != res.name) {
-         await  this.setState({ authors: res.author })
+          await this.setState({ authors: res.author })
           this.changeOptions();
         }
       })
@@ -161,15 +159,15 @@ handleSubmit() {
                   <Label for="role" className="float-left">
                     Select person with whom you want to share:
                   </Label>
-                  <Input type="select" name="select"  onClick={this.handleSelectUserChange}>
+                  <Input type="select" name="select" onClick={this.handleSelectUserChange}>
                     {
                       this.state.distinct ? (
                         this.state.distinct.map((name, i) => {
                           return (
                             name.email != localStorage.getItem("userDisplay") ? (
-                            <option key={i}>
-                              {name.email}
-                            </option>
+                              <option key={i}>
+                                {name.email}
+                              </option>
                             ) : (<option hidden></option>)
                           );
                         })
